@@ -1,5 +1,7 @@
 <?php include_once "title.php"; ?>
 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <style>
     #subtitle
     {
@@ -37,14 +39,14 @@
         border: 3px solid seagreen;
 
     }
-    
+
     .btn:focus-within
     {
-       color:black;
-       background-color:white;  
-       border: 3px solid seagreen;
+        color:black;
+        background-color:white;  
+        border: 3px solid seagreen;
     }
-    
+
     .bookButton
     {
         color: black;
@@ -111,25 +113,33 @@
         <?php
         for ($x = 0; $x < count($times); $x++) {
             if ($x == 0) {
-                echo"<tr><td><button class='btn'>$times[$x]</button></td>";
+                echo"<tr><td><button class='btn' onclick=refreshTime('" . $times[$x] ."')>$times[$x]</button></td>";
             } else if ($x == (count($times) - 1)) {
-                echo "<td><button class='btn'>$times[$x]</button></td></tr>";
+                echo "<td><button class='btn' onclick=refreshTime('" . $times[$x] . "')>$times[$x]</button></td></tr>";
             } else if (($x + 1) % 4 == 0 && ( $x != count($times) - 1) && $x != 0) {
-                echo "<td><button class='btn'>$times[$x]</button></td></tr><tr>";
+                echo "<td><button class='btn' onclick=refreshTime('" . $times[$x] . "')>$times[$x]</button></td></tr><tr>";
             } else
-                echo "<td><button class='btn'>$times[$x]</button></td>";
+                echo "<td><button class='btn' onclick=refreshTime('" . $times[$x] . "')>$times[$x]</button></td>";
         }
         ?>
     </table>
     <br>
-    <button id="book" class="bookButton" type="button" onclick="clickedBookButton()" onmouseover="changeBook('white', '40px', 'seagreen', 'normal')" onmouseout="changeBook('black', '30px', 'white', 'normal')">Book!</button>
+    <button id="book" class="bookButton" type="button" onmouseover="changeBook('white', '40px', 'seagreen', 'bold')" onclick="clickedBookButton()" onmouseout="changeBook('black', '30px', 'white', 'normal')">Book!</button>
 </center>
 
 <script>
 
+    var selectedTime = "";
+
+    function refreshTime(x)
+    {
+        selectedTime = x;
+    }
+
     function clickedBookButton()
     {
-        alert('You booked a tee time at 10:30 am on 10/01/19');
+            //alert('You booked a tee time at ' +  selectedTime + ' on 10/01/19');
+            swal("Congrats!", "You booked a tee time at " + selectedTime + " on 10/01/19", "success");
     }
 
     function changeBook(x, y, z, a)
