@@ -97,7 +97,7 @@
                 break;
             case "alawai":
                 echo "Tee-times for Ala Wai Golf Club";
-                echo "<style> body {background-image:url('https://www.honolulu.gov/rep/site/des/golf_imgs/Ala_Wai_Golf_Course.jpg'); background-repeat: no-repeat; background-attachment: scroll; background-position: 50% 90%; background-size: 800px 450px;}</style>";
+                echo "<style> body {background-image:url('https://media-cdn.tripadvisor.com/media/photo-s/01/d6/7d/66/ala-wai-golf-course-from.jpg'); background-repeat: no-repeat; background-attachment: scroll; background-position: 50% 90%; background-size: 800px 450px;}</style>";
                 break;
         }
         ?>&ensp;

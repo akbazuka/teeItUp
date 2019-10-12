@@ -201,7 +201,7 @@
 
     <div class="box" id="box8">
         <a class="courses" target="_self" href="teeTimes.php?courseName=alawai" onmouseover="boxHover('box8', 'crimson')" onmouseout="boxHover('box8', 'green')">
-            <img src="https://www.honolulu.gov/rep/site/des/golf_imgs/Ala_Wai_Golf_Course.jpg" alt="Ala Wai Golf Club">
+            <img src="https://media-cdn.tripadvisor.com/media/photo-s/01/d6/7d/66/ala-wai-golf-course-from.jpg" alt="Ala Wai Golf Club">
             <div class="desc">Ala Wai Golf Club</div>
         </a>
         <div class="popup topright" onclick="popUp('infoAlawai')">i
