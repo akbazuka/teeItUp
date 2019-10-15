@@ -1,6 +1,19 @@
-<?php include_once 'title.php'; ?>
+<?php
+//Include title
+include_once 'title.php';
+
+// Initialize the session
+session_start();
+
+// Check if the user is logged in, if not then redirect him to login page
+if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+    header("location: login.php");
+    exit;
+}
+?>
 
 <head> 
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">-->
     <style>
         html
         {
@@ -122,12 +135,21 @@
             to {opacity:1 ;}
         }
 
+        div.user
+        {
+            color: white;
+            font-size: 300%;
+        }
+
     </style>
 </head>
 
 <body>
     <br>
-    <br>
+    <div class="user">
+        &ensp;Welcome, <b><?php echo "<em>" . htmlspecialchars($_SESSION["username"]) . "</em>"; ?></b>
+        <a href="logout.php" class="btn btn-danger">Sign Out</a>
+    </div>
 <center>
     <div class="box" id="box1">
         <a class="courses" target="_self" href="teeTimes.php?courseName=royal" onmouseover="boxHover('box1', 'crimson')" onmouseout="boxHover('box1', 'green')">
