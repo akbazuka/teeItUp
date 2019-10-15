@@ -138,7 +138,93 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         div.user
         {
             color: white;
-            font-size: 300%;
+            font-size: 250%;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 6px 12px;
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: normal;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -ms-touch-action: manipulation;
+            touch-action: manipulation;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background-image: none;
+            border: 1px solid white;
+            border-radius: 4px;
+        }
+
+        .btn-danger {
+            color: #fff;
+            background-color: #d9534f;
+            border-color: white;
+        }
+        .btn-danger:focus,
+        .btn-danger.focus {
+            color: #fff;
+            background-color: #c9302c;
+            border-color: white;
+        }
+        .btn-danger:hover {
+            color: #fff;
+            background-color: #c9302c;
+            border-color: whitesmoke;
+            border-width: 2px;
+        }
+        
+        .btn-danger:active,
+        .btn-danger.active,
+        .open > .dropdown-toggle.btn-danger {
+            color: #fff;
+            background-color: #c9302c;
+            border-color: whitesmoke;
+        }
+        
+        .btn-danger:active:hover,
+        .btn-danger.active:hover,
+        .open > .dropdown-toggle.btn-danger:hover,
+        .btn-danger:active:focus,
+        .btn-danger.active:focus,
+        .open > .dropdown-toggle.btn-danger:focus,
+        .btn-danger:active.focus,
+        .btn-danger.active.focus,
+        .open > .dropdown-toggle.btn-danger.focus {
+            color: #fff;
+            background-color: #ac2925;
+            border-color: whitesmoke;
+        }
+        
+        .btn-danger:active,
+        .btn-danger.active,
+        .open > .dropdown-toggle.btn-danger {
+            background-image: none;
+        }
+        
+        .btn-danger.disabled:hover,
+        .btn-danger[disabled]:hover,
+        fieldset[disabled] .btn-danger:hover,
+        .btn-danger.disabled:focus,
+        .btn-danger[disabled]:focus,
+        fieldset[disabled] .btn-danger:focus,
+        .btn-danger.disabled.focus,
+        .btn-danger[disabled].focus,
+        fieldset[disabled] .btn-danger.focus {
+            background-color: #d9534f;
+            border-color: white;
+        }
+        
+        .btn-danger .badge {
+            color: #d9534f;
+            background-color: #fff;
         }
 
     </style>
@@ -148,7 +234,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     <br>
     <div class="user">
         &ensp;Welcome, <b><?php echo "<em>" . htmlspecialchars($_SESSION["username"]) . "</em>"; ?></b>
-        <a href="logout.php" class="btn btn-danger">Sign Out</a>
+        <a href="logout.php" class="btn btn-danger" style="position: absolute; right: 30;">Sign Out</a>
     </div>
 <center>
     <div class="box" id="box1">

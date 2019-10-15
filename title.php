@@ -1,9 +1,8 @@
-<html>
     <head>
         <title>Tee It Up!</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+        <link href='https://fonts.googleapis.com/css?family=Charm' rel='stylesheet'>
         <style>
             html
             {
@@ -42,7 +41,7 @@
     <body>
         <a class="header" target="_self" href="index.php">
             <div id="header">
-                <span style="font-size:400%;">&ensp;<span style="text-decoration: underline; text-decoration-color: black">Tee It Up!</span></span><span style="font-size:200%">&ensp;A simple solution to book and manage your golf tee times.</span>
+                <span style="font-size:430%;">&ensp;<span style="text-decoration: underline; text-decoration-color: black; font-family: 'Charm';">Tee It Up!</span></span><span style="font-size:200%">&ensp;A simple solution to book and manage your golf tee times.</span>
                 <!--&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<img id="logo" src="teeItUpLogo.png" alt="Tee It Up">-->
             </div>
         </a>
