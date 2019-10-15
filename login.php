@@ -106,9 +106,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             .outer {
                 display: table;
                 position: absolute;
-                top: 0;
+                top: 25%;
+                bottom:0;
                 left: 0;
-                height: 140%;
+                height: 80%;
                 width: 100%;
             }
 

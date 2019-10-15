@@ -105,9 +105,9 @@ include_once 'title.php';
             .outer {
                 display: table;
                 position: absolute;
-                top: 0;
+                top: 25%;
                 left: 0;
-                height: 140%;
+                height: 80%;
                 width: 100%;
             }
 
