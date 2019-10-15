@@ -180,7 +180,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             border-color: whitesmoke;
             border-width: 2px;
         }
-        
+
         .btn-danger:active,
         .btn-danger.active,
         .open > .dropdown-toggle.btn-danger {
@@ -188,7 +188,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             background-color: #c9302c;
             border-color: whitesmoke;
         }
-        
+
         .btn-danger:active:hover,
         .btn-danger.active:hover,
         .open > .dropdown-toggle.btn-danger:hover,
@@ -202,13 +202,13 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             background-color: #ac2925;
             border-color: whitesmoke;
         }
-        
+
         .btn-danger:active,
         .btn-danger.active,
         .open > .dropdown-toggle.btn-danger {
             background-image: none;
         }
-        
+
         .btn-danger.disabled:hover,
         .btn-danger[disabled]:hover,
         fieldset[disabled] .btn-danger:hover,
@@ -221,9 +221,75 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             background-color: #d9534f;
             border-color: white;
         }
-        
+
         .btn-danger .badge {
             color: #d9534f;
+            background-color: #fff;
+        }
+
+        .btn-warning {
+            color: #fff;
+            background-color: #f0ad4e;
+            border-color: white;
+        }
+        
+        .btn-warning:focus,
+        .btn-warning.focus {
+            color: #fff;
+            background-color: #ec971f;
+            border-color: white;
+        }
+        
+        .btn-warning:hover {
+            color: #fff;
+            background-color: #ec971f;
+            border-color: white;
+            border-width: 2px;
+        }
+        
+        .btn-warning:active,
+        .btn-warning.active,
+        .open > .dropdown-toggle.btn-warning {
+            color: #fff;
+            background-color: #ec971f;
+            border-color: white;
+        }
+        
+        .btn-warning:active:hover,
+        .btn-warning.active:hover,
+        .open > .dropdown-toggle.btn-warning:hover,
+        .btn-warning:active:focus,
+        .btn-warning.active:focus,
+        .open > .dropdown-toggle.btn-warning:focus,
+        .btn-warning:active.focus,
+        .btn-warning.active.focus,
+        .open > .dropdown-toggle.btn-warning.focus {
+            color: #fff;
+            background-color: #d58512;
+            border-color: white;
+        }
+        
+        .btn-warning:active,
+        .btn-warning.active,
+        .open > .dropdown-toggle.btn-warning {
+            background-image: none;
+        }
+        
+        .btn-warning.disabled:hover,
+        .btn-warning[disabled]:hover,
+        fieldset[disabled] .btn-warning:hover,
+        .btn-warning.disabled:focus,
+        .btn-warning[disabled]:focus,
+        fieldset[disabled] .btn-warning:focus,
+        .btn-warning.disabled.focus,
+        .btn-warning[disabled].focus,
+        fieldset[disabled] .btn-warning.focus {
+            background-color: #f0ad4e;
+            border-color: white;
+        }
+        
+        .btn-warning .badge {
+            color: #f0ad4e;
             background-color: #fff;
         }
 
@@ -235,6 +301,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     <div class="user">
         &ensp;Welcome, <b><?php echo "<em>" . htmlspecialchars($_SESSION["username"]) . "</em>"; ?></b>
         <a href="logout.php" class="btn btn-danger" style="position: absolute; right: 30;">Sign Out</a>
+        <a href="reset-password.php" class="btn btn-warning" style="position: absolute; right: 120;">Reset Your Password</a>
     </div>
 <center>
     <div class="box" id="box1">
