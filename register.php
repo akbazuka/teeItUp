@@ -101,7 +101,12 @@ include_once 'title.php';
         <title>Sign Up</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
         <style type="text/css">
-            body{ font: 14px sans-serif; background-color: black;}
+            body
+            { 
+                font: 14px sans-serif; 
+                background-color: black;
+            }
+            
             .outer {
                 display: table;
                 position: absolute;
@@ -110,7 +115,7 @@ include_once 'title.php';
                 height: 80%;
                 width: 100%;
             }
-
+            
             .middle {
                 display: table-cell;
                 vertical-align: middle;

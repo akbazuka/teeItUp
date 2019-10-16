@@ -103,6 +103,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 font: 14px sans-serif;
                 background-color: black;
             }
+            
             .outer {
                 display: table;
                 position: absolute;

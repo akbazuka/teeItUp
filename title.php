@@ -9,14 +9,17 @@
                 /*text-align:center;*/
                 background-color:black;
             }
+            
+            /* !important Overrides any a tag styling on other pages where this page is included*/
             a.header
             {
-                text-decoration:none;
+                text-decoration:none !important;
             }
+            
             a.header:visited
             {
-                color:black; 
-                text-decoration:none;
+                color:black !important; 
+                text-decoration:none !important;
             }
 
             #header

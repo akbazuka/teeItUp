@@ -78,7 +78,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <title>Reset Password</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
         <style type="text/css">
-            body{ font: 14px sans-serif; background-color: black;}
+            body
+            { 
+                font: 14px sans-serif; 
+                background-color: black;
+            }
+
             .outer {
                 display: table;
                 position: absolute;
