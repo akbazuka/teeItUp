@@ -1,0 +1,33 @@
+html
+{
+    /*text-align:center;*/
+    background-color:black !important;
+}
+
+/* !important Overrides any a tag styling on other pages where this page is included*/
+a.header
+{
+    text-decoration:none !important;
+}
+
+a.header:visited
+{
+    color:black !important; 
+    text-decoration:none !important;
+}
+
+#header
+{
+    /*font-family:Georgia;*/
+    color:black;
+    background-color:seagreen;
+    /*top:0;//To make header stick to top*/
+    position: -webkit-sticky; /* In case run on Safari */
+    position:sticky;
+    border-style:ridge;
+    border-color: white;
+    border-radius: 10px;
+    /*height:200px;*/
+    padding:3% 0;
+}
+

@@ -1,0 +1,202 @@
+#subtitle
+    {
+        color:white;
+        background-color:seagreen;
+        border: 3px solid white;
+        border-radius: 10px;
+        font-size: 40px;
+        padding:1%;
+        /*text-decoration: underline;
+        text-decoration-color: white;*/
+
+    }
+    .timeTable
+    {
+        width: 50%;
+        color: white;
+        text-align: center;
+        border-spacing: 20px;
+    }
+    .btn
+    {
+        font-family: 'Roboto';
+        border: 3px solid white;
+        color:white;
+        background-color: black;
+        border-radius: 10px;
+        padding: 17%;  
+        font-size: 20px;
+        font-weight: bold;
+    }
+    .btn:hover
+    {
+        color:black;
+        background-color:white;  
+        border: 3px solid seagreen;
+
+    }
+
+    .btn:focus-within
+    {
+        color:black;
+        background-color:white;  
+        border: 3px solid seagreen;
+    }
+/*
+Book Button Before Transformations
+    .bookButton
+    {
+        color: black;
+        background-color: white;
+        border: 3px solid black;
+        width: 15%;
+        height: 7%;
+        border-radius: 10px;
+        font-size: 30px;
+    }
+*/
+
+    .btn1 {
+        display: inline-block;
+        padding: 6px 12px;
+        margin-bottom: 0;
+        font-size: 14px;
+        font-weight: normal;
+        line-height: 1.42857143;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        -ms-touch-action: manipulation;
+        touch-action: manipulation;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        background-image: none;
+        border: 1px solid white;
+        border-radius: 4px;
+    }
+
+    .btn-danger {
+        color: #fff;
+        background-color: #d9534f;
+        border-color: white;
+    }
+    .btn-danger:focus,
+    .btn-danger.focus {
+        color: #fff;
+        background-color: #c9302c;
+        border-color: white;
+    }
+    .btn-danger:hover {
+        color: #fff;
+        background-color: #c9302c;
+        border-color: whitesmoke;
+        border-width: 2px;
+    }
+
+    .btn-danger:active,
+    .btn-danger.active,
+    .open > .dropdown-toggle.btn-danger {
+        color: #fff;
+        background-color: #c9302c;
+        border-color: whitesmoke;
+    }
+
+    .btn-danger:active:hover,
+    .btn-danger.active:hover,
+    .open > .dropdown-toggle.btn-danger:hover,
+    .btn-danger:active:focus,
+    .btn-danger.active:focus,
+    .open > .dropdown-toggle.btn-danger:focus,
+    .btn-danger:active.focus,
+    .btn-danger.active.focus,
+    .open > .dropdown-toggle.btn-danger.focus {
+        color: #fff;
+        background-color: #ac2925;
+        border-color: whitesmoke;
+    }
+
+    .btn-danger:active,
+    .btn-danger.active,
+    .open > .dropdown-toggle.btn-danger {
+        background-image: none;
+    }
+
+    .btn-danger.disabled:hover,
+    .btn-danger[disabled]:hover,
+    fieldset[disabled] .btn-danger:hover,
+    .btn-danger.disabled:focus,
+    .btn-danger[disabled]:focus,
+    fieldset[disabled] .btn-danger:focus,
+    .btn-danger.disabled.focus,
+    .btn-danger[disabled].focus,
+    fieldset[disabled] .btn-danger.focus {
+        background-color: #d9534f;
+        border-color: white;
+    }
+
+    .btn-danger .badge {
+        color: #d9534f;
+        background-color: #fff;
+    }
+
+    div.user
+    {
+        color: white;
+        font-size: 250%;
+    }
+
+    /*For Jumping Book Button*/
+    .bttn 
+    {
+        font-size: 18px;
+        background: seagreen;
+        width: 180px;
+        padding: 4px 0;
+        position: absolute;
+        left: 50%;
+        top: 95%;
+        transform: translateX(-50%) translateY(-50%);
+        border-radius: 4px;
+        /*border: 3px solid white;*/
+        margin: 5px;
+        /*To make box look like a button*/
+        text-decoration: none;
+        color: white;
+        padding: 2px 4px;
+        display: inline-block;
+        border: 2px solid rgba(0,0,0,0.25);
+        border-bottom: 6px solid rgba(0,0,0,0.25);
+        border-radius: 4px;
+        text-shadow: 0 1px 0 rgba(0,0,0,0.25);
+        font-weight: bolder;
+    }
+    .bttn p 
+    {
+        font-family: 'Roboto';
+        text-align: center;
+        text-transform: uppercase;
+        color: #FFF;
+        user-select: none;
+    }
+    .bttn:hover 
+    {
+        cursor: pointer;
+    }
+    /*
+    Shadow of jumping button
+    .bttn:after 
+    {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 10%;
+        border-radius: 50%;
+        background-color: #927608;
+        opacity: 0.4;
+        bottom: -30px;
+    }*/
+

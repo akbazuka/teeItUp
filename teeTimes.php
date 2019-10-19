@@ -1,4 +1,5 @@
-<?php include_once "title.php"; 
+<?php
+include_once "title.php";
 
 // Initialize the session
 session_start();
@@ -11,155 +12,9 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 ?>
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-<style>
-    #subtitle
-    {
-        color:white;
-        background-color:seagreen;
-        border: 3px solid white;
-        border-radius: 10px;
-        font-size: 40px;
-        padding:1%;
-        /*text-decoration: underline;
-        text-decoration-color: white;*/
-
-    }
-    .timeTable
-    {
-        width: 50%;
-        color: white;
-        text-align: center;
-        border-spacing: 20px;
-    }
-    .btn
-    {
-        border: 3px solid white;
-        color:white;
-        background-color: black;
-        border-radius: 10px;
-        padding: 17%;  
-        font-size: 20px;
-        font-weight: bold;
-    }
-    .btn:hover
-    {
-        color:black;
-        background-color:white;  
-        border: 3px solid seagreen;
-
-    }
-
-    .btn:focus-within
-    {
-        color:black;
-        background-color:white;  
-        border: 3px solid seagreen;
-    }
-
-    .bookButton
-    {
-        color: black;
-        background-color: white;
-        border: 3px solid black;
-        width: 15%;
-        height: 7%;
-        border-radius: 10px;
-        font-size: 30px;
-    }
-    
-    .btn1 {
-            display: inline-block;
-            padding: 6px 12px;
-            margin-bottom: 0;
-            font-size: 14px;
-            font-weight: normal;
-            line-height: 1.42857143;
-            text-align: center;
-            white-space: nowrap;
-            vertical-align: middle;
-            -ms-touch-action: manipulation;
-            touch-action: manipulation;
-            cursor: pointer;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            background-image: none;
-            border: 1px solid white;
-            border-radius: 4px;
-        }
-
-        .btn-danger {
-            color: #fff;
-            background-color: #d9534f;
-            border-color: white;
-        }
-        .btn-danger:focus,
-        .btn-danger.focus {
-            color: #fff;
-            background-color: #c9302c;
-            border-color: white;
-        }
-        .btn-danger:hover {
-            color: #fff;
-            background-color: #c9302c;
-            border-color: whitesmoke;
-            border-width: 2px;
-        }
-        
-        .btn-danger:active,
-        .btn-danger.active,
-        .open > .dropdown-toggle.btn-danger {
-            color: #fff;
-            background-color: #c9302c;
-            border-color: whitesmoke;
-        }
-        
-        .btn-danger:active:hover,
-        .btn-danger.active:hover,
-        .open > .dropdown-toggle.btn-danger:hover,
-        .btn-danger:active:focus,
-        .btn-danger.active:focus,
-        .open > .dropdown-toggle.btn-danger:focus,
-        .btn-danger:active.focus,
-        .btn-danger.active.focus,
-        .open > .dropdown-toggle.btn-danger.focus {
-            color: #fff;
-            background-color: #ac2925;
-            border-color: whitesmoke;
-        }
-        
-        .btn-danger:active,
-        .btn-danger.active,
-        .open > .dropdown-toggle.btn-danger {
-            background-image: none;
-        }
-        
-        .btn-danger.disabled:hover,
-        .btn-danger[disabled]:hover,
-        fieldset[disabled] .btn-danger:hover,
-        .btn-danger.disabled:focus,
-        .btn-danger[disabled]:focus,
-        fieldset[disabled] .btn-danger:focus,
-        .btn-danger.disabled.focus,
-        .btn-danger[disabled].focus,
-        fieldset[disabled] .btn-danger.focus {
-            background-color: #d9534f;
-            border-color: white;
-        }
-        
-        .btn-danger .badge {
-            color: #d9534f;
-            background-color: #fff;
-        }
-        
-        div.user
-        {
-            color: white;
-            font-size: 250%;
-        }
-</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+<!--<link rel="stylesheet" href="//brick.a.ssl.fastly.net/Roboto:400"/>-->
+<link rel="stylesheet" type="text/css" href="cssFiles/teeTimesCSS.css"/>
 
 <body>
     <br>
@@ -219,7 +74,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         <?php
         for ($x = 0; $x < count($times); $x++) {
             if ($x == 0) {
-                echo"<tr><td><button class='btn' onclick=refreshTime('" . $times[$x] ."')>$times[$x]</button></td>";
+                echo"<tr><td><button class='btn' onclick=refreshTime('" . $times[$x] . "')>$times[$x]</button></td>";
             } else if ($x == (count($times) - 1)) {
                 echo "<td><button class='btn' onclick=refreshTime('" . $times[$x] . "')>$times[$x]</button></td></tr>";
             } else if (($x + 1) % 4 == 0 && ( $x != count($times) - 1) && $x != 0) {
@@ -230,11 +85,14 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         ?>
     </table>
     <br>
-    <button id="book" class="bookButton" type="button" onmouseover="changeBook('white', '40px', 'seagreen', 'bold')" onclick="clickedBookButton()" onmouseout="changeBook('black', '30px', 'white', 'normal')">Book!</button>
+    <!--<button id="book" class="bookButton" type="button" onmouseover="changeBook('white', '40px', 'seagreen', 'bold')" onclick="clickedBookButton()" onmouseout="changeBook('black', '30px', 'white', 'normal')">Book!</button>-->
+    <div class="bttn" onclick="clickedBookButton()">
+        <p>Book!</p>
+    </div>
 </center>
 
+<!--<script src="/Users/akbazuka/Desktop/kedlena/teeItUp/jsFiles/teeTimesJS.js"></script>-->
 <script>
-
     var selectedTime = "";
 
     function refreshTime(x)
@@ -244,8 +102,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
     function clickedBookButton()
     {
-            //alert('You booked a tee time at ' +  selectedTime + ' on 10/01/19');
-            swal("Congrats!", "You booked a tee time at " + selectedTime + " on 10/01/19", "success");
+        //alert('You booked a tee time at ' +  selectedTime + ' on 10/01/19');
+        swal("Congrats!", "You booked a tee time at " + selectedTime + " on 10/01/19", "success");
     }
 
     function changeBook(x, y, z, a)
@@ -255,5 +113,16 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         document.getElementById("book").style.backgroundColor = z;
         document.getElementById("book").style.fontWeight = a;
     }
+
+    //For jumping book button
+    var $button = document.querySelector('.bttn');
+    $button.addEventListener('click', function () {
+        var duration = 0.3,
+                delay = 0.08;
+        TweenMax.to($button, duration, {scaleY: 1.6, ease: Expo.easeOut});
+        TweenMax.to($button, duration, {scaleX: 1.2, scaleY: 1, ease: Back.easeOut, easeParams: [3], delay: delay});
+        TweenMax.to($button, duration * 1.25, {scaleX: 1, scaleY: 1, ease: Back.easeOut, easeParams: [6], delay: delay * 3});
+    });
 </script>
+<br>
 </body>
