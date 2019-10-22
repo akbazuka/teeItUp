@@ -86,7 +86,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     </table>
     <br>
     <!--<button id="book" class="bookButton" type="button" onmouseover="changeBook('white', '40px', 'seagreen', 'bold')" onclick="clickedBookButton()" onmouseout="changeBook('black', '30px', 'white', 'normal')">Book!</button>-->
-    <div class="bttn" onclick="clickedBookButton()">
+    <div class="bttn" onclick="if(selectedTime !== ''){clickedBookButton();}">
         <p>Book!</p>
     </div>
 </center>
