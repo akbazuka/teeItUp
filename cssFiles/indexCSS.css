@@ -3,6 +3,11 @@ html
     /*text-align:center;*/
     background-color:black;
 }
+body{
+    /*??Try
+    max-width:1200px;
+    margin:auto;*/
+}
 .box 
 {
     margin-left: 5%;
@@ -17,6 +22,10 @@ html
     border-radius: 25px;
     background-color: white;
     position:relative;
+    /*??Try
+    display: flex;
+    flex-wrap: wrap;
+    */
 }  
 
 .box img
@@ -275,4 +284,49 @@ fieldset[disabled] .btn-warning.focus {
     color: #f0ad4e;
     background-color: #fff;
 }
+
+/*
+//For range of particular phone screen sizes; can adjust dimension according to what kind of phone
+@media only screen and (min-width: 320px) and (max-width: 480px){ 
+    // ruleset for >= 320px 
+}
+
+//Or with separate rules:
+
+@media only screen and (max-width: 480px) { 
+    // ruleset for >= 480px 
+    //Eg: Make box container if page opened on screen size with width less than or equal 480px
+        .box{
+            width: 17%;
+            height: 19%;
+        }
+}
+
+//For particular resolution screens; (dpi=dots per inch/ dpc=dots per centimeter)
+@media only screen and (min-resolution: 150dpi) { 
+
+}
+
+//For multiple rules, use comma to separate within the query
+    //In this case, if screen size is >= 480px and screen is in landscape mode
+@media only screen and (min-resolution: 150dpi), (orientation: landscape) { 
+
+}
+
+//General tablet breakpoint:
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+
+    //Eg: (Does not work for this CSS file)
+    //This CSS will make the page title and description float to the left of the gallery images. 
+    //Resize the browser to observe these changes at various screen widths.
+    .box, .page-description {
+        float: left;
+        width: 20em; //20em = 20 x default html value for width
+    }
+
+    .page-description {
+        text-align: left;
+    }       
+}
+*/
 
