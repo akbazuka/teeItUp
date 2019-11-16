@@ -1,5 +1,5 @@
 <?php
-include_once "title.php";
+/*include_once "title.php";
 
 // Initialize the session
 session_start();
@@ -9,6 +9,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     header("location: login.php");
     exit;
 }
+ */
 ?>
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -25,53 +26,12 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 <center>
     <br>
     <br>
-    <span id="subtitle">&ensp;<?php
-        $courseName = $_GET['courseName'];
-        $courseID = 0;
-        switch ($courseName) {
-            case "royal":
-                echo "Tee-times for Royal Hawaiian Golf Club";
-                echo "<style> body {background-image:url('https://cdn.shopify.com/s/files/1/0191/3924/products/royal3.jpg?v=1565999211'); background-repeat: no-repeat; background-attachment: scroll; background-position: 50% 116%; background-size: 800px 450px;}</style>";
+    <!--<span id="subtitle">&ensp;<?php
+                //echo "Tee-times for Ko'olau Golf Club";
+                //echo "<style> body {background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmoNGIPL3FogIO41FRiln3Dhy0LwMdevqSEGLC5O0-ssVKfyyOEA'); background-repeat: no-repeat; background-attachment: scroll; background-position: 50% 116%; background-size: 800px 450px;}</style>";
                 $courseID = 1;
-                break;
-            case "koolau":
-                echo "Tee-times for Ko'olau Golf Club";
-                echo "<style> body {background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmoNGIPL3FogIO41FRiln3Dhy0LwMdevqSEGLC5O0-ssVKfyyOEA'); background-repeat: no-repeat; background-attachment: scroll; background-position: 50% 116%; background-size: 800px 450px;}</style>";
-                $courseID = 2;
-                break;
-            case "bayview":
-                echo "Tee-times for Bayview Golf Course";
-                echo "<style> body {background-image:url('https://cdn.shopify.com/s/files/1/0191/3924/products/website-2_47e4f125-a4b9-4680-a043-3bc5b02ff6cf.jpg?v=1566009408'); background-repeat: no-repeat; background-attachment: scroll; background-position: 50% 116%; background-size: 800px 450px;}</style>";
-                $courseID = 3;
-                break;
-            case "turtle":
-                echo "Tee-times for Turtle Bay Golf Resort";
-                echo "<style> body {background-image:url('https://www.turtlebayresort.com/sites/default/files/KamGolfPage_BookNow_4.jpg'); background-repeat: no-repeat; background-attachment: scroll; background-position: 50% 116%; background-size: 800px 450px;}</style>";
-                $courseID = 4;
-                break;
-            case "leilehua":
-                echo "Tee-times for Leilehua Golf Club";
-                echo "<style> body {background-image:url('https://millerdesigngolf.com/images/galleries/past_projects/leilehua_golf_course/Green_after_shot_8_green.jpg'); background-repeat: no-repeat; background-attachment: scroll; background-position: 50% 116%; background-size: 800px 450px;}</style>";
-                $courseID = 5;
-                break;
-            case "koolina":
-                echo "Tee-times for Ko'olina Golf Club";
-                echo "<style> body {background-image:url('https://cdn.shopify.com/s/files/1/0191/3924/products/newkoolina1_7e5b8ff8-893c-42f5-accb-33d6bfab44f8.jpg?v=1566006290'); background-repeat: no-repeat; background-attachment: fixed; background-position: 50% 116%; background-size: 800px 450px;}</style>";
-                $courseID = 6;
-                break;
-            case "kapolei":
-                echo "Tee-times for Kapolei Golf Course";
-                echo "<style> body {background-image:url('https://cdn.shopify.com/s/files/1/0191/3924/products/newkap5.jpg?v=1566007373'); background-repeat: no-repeat; background-attachment: scroll; background-position: 50% 116%; background-size: 800px 450px;}</style>";
-                $courseID = 7;
-                break;
-            case "alawai":
-                echo "Tee-times for Ala Wai Golf Club";
-                echo "<style> body {background-image:url('https://media-cdn.tripadvisor.com/media/photo-s/01/d6/7d/66/ala-wai-golf-course-from.jpg'); background-repeat: no-repeat; background-attachment: scroll; background-position: 50% 116%; background-size: 800px 450px;}</style>";
-                $courseID = 8;
-                break;
-        }
-        ?>&ensp;
-    </span>
+        ?><!&ensp;>
+    </span>-->
 
     <br><br><br><br><br>
 
@@ -100,19 +60,18 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         // set the resulting array to associative  
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
-        //echo print_r($result); //Check contents of returned array form the database
-         
-        $bookedTimes = array(); //Declare array to store booked times 
+        //echo print_r($result);
         
-        //Stores booked tee times from database into a php array to be used to determine if time buttons are active or inactive
+        $bookedTimes = array();
+        
          foreach ($result as $row) { 
              array_push($bookedTimes,$row['booked']);
          }
          
          //echo "These are the booked tee times: ".print_r($bookedTimes);
-
-/*//Checks if values pulled from database matches the the vakues in the times array declared above; checks if there are missing corresponding values>
-//---------------------------------------------------------------> 
+              
+/*Checks if values pulled from database matches the the vakues in the times array declared above; checks if there are missing corresponding values>*/
+/*------------------------------------------------------------> 
 //        $what = new DateTime($result[10]["teeDateTime"]);
 //        $what = $what->format('H:i');
 //        echo "What is an: ".gettype($what)."\n";
@@ -128,17 +87,17 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         }
         //echo sizeof($formatTimes);
         
-//        echo "These are the formatted Times: ".print_r($formatTimes);
+        echo "These are the formatted Times: ".print_r($formatTimes);
         
 //        echo "\nThis is the second format time: ".$formatTimes[1];
 //        echo "\nThis is the second time: ".$times[1];
 //        
-//        if($times[11]==$formatTimes[10])
-//            echo "\nTrue or false: True";
-//        else echo "\nTrue or false: False";
+        if($times[11]==$formatTimes[10])
+            echo "\nTrue or false: True";
+        else echo "\nTrue or false: False";
         
-//        echo "\nThis is the size of the array times: ".sizeof($times);
-//        echo "\nThis is the size of the array formatTimes: ".sizeof($formatTimes)."\n";
+        echo "\nThis is the size of the array times: ".sizeof($times);
+        echo "\nThis is the size of the array formatTimes: ".sizeof($formatTimes)."\n";
 
         $missingTimes = array();
         //Check if times are booked so can turn off corresponding button later;
@@ -173,11 +132,9 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     <table class="timeTable">
         <!Have to make loop to iterate through array and display as table>
         <?php
-        /* Note: Change $bookedTimes variable below to $missingTimes if changed above*/
-        //Loop displays tee time buttons
         for ($x = 0; $x < sizeof($times); $x++) {
 
-            if ($bookedTimes[$x] == 1 && $x == 0) {
+            if ($bookedTImes[$x] == 1 && $x == 0) {
                 echo "<tr><td><button class='btn_off'>$times[$x]</div></td>";
             } else if ($bookedTimes[$x] != 1 && $x == 0) {
                 echo"<tr><td><button class='btn' style='cursor:pointer;' onclick=refreshTime('" . $times[$x] . "')>$times[$x]</button></td>";
@@ -196,13 +153,18 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         }
         ?>
     </table>
+    <!--
     <br>
-    <!--<button id="book" class="bookButton" type="button" onmouseover="changeBook('white', '40px', 'seagreen', 'bold')" onclick="clickedBookButton()" onmouseout="changeBook('black', '30px', 'white', 'normal')">Book!</button>-->
+    <button id="book" class="bookButton" type="button" onmouseover="changeBook('white', '40px', 'seagreen', 'bold')" onclick="clickedBookButton()" onmouseout="changeBook('black', '30px', 'white', 'normal')">Book!</button>
     <div class="bttn" onclick="if (selectedTime !== '') {
                 clickedBookButton();
             }">
-                <p>Book!</p>
+    <p>Book!</p>
     </div>
+    
+    <div>
+        <p style="color: black; font-size: 40px;">Hello</p>
+    </div>-->
 </center>
 
 <!--<script src="/Users/akbazuka/Desktop/kedlena/teeItUp/jsFiles/teeTimesJS.js"></script>-->
@@ -240,3 +202,4 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 </script>
 <br>
 </body>
+

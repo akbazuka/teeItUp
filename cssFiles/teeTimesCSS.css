@@ -27,20 +27,33 @@
         padding: 17%;  
         font-size: 20px;
         font-weight: bold;
+        /*cursor: pointer;*/
     }
     .btn:hover
     {
         color:black;
         background-color:white;  
         border: 3px solid seagreen;
-
+        /*cursor: pointer;*/
     }
-
     .btn:focus-within
     {
         color:black;
         background-color:white;  
         border: 3px solid seagreen;
+        /*cursor: pointer;*/
+    }
+    .btn_off
+    {
+        font-family: 'Roboto';
+        border: 3px solid white;
+        color:white;
+        background-color: grey;
+        border-radius: 10px;
+        padding: 17%;  
+        font-size: 20px;
+        font-weight: bold;
+        text-decoration: line-through white;
     }
 /*
 Book Button Before Transformations
@@ -148,8 +161,8 @@ Book Button Before Transformations
         font-size: 250%;
     }
 
-    /*For Jumping Book Button*/
-    .bttn 
+/*    For Jumping Book Button
+*/    .bttn 
     {
         font-size: 18px;
         background: seagreen;
@@ -186,6 +199,7 @@ Book Button Before Transformations
         cursor: pointer;
         border-bottom: 4px solid rgba(0,0,0,0.25);
     }
+    
     /*
     Shadow of jumping button
     .bttn:after 
