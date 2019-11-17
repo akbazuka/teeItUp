@@ -17,6 +17,9 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 <link rel="stylesheet" type="text/css" href="cssFiles/teeTimesCSS.css"/>
 
 <body>
+    <!import jQuery>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
     <br>
     <div class="user">
         &ensp;Signed in as <b><?php echo "<em>" . htmlspecialchars($_SESSION["username"]) . "</em>"; ?></b>
@@ -76,6 +79,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     <br><br><br><br><br>
 
     <?php
+    
     $times = array("10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45");
 
     try {
@@ -107,9 +111,15 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         //Stores booked tee times from database into a php array to be used to determine if time buttons are active or inactive
          foreach ($result as $row) { 
              array_push($bookedTimes,$row['booked']);
-         }
-         
+         }        
          //echo "These are the booked tee times: ".print_r($bookedTimes);
+         
+        $timesID = array(); //Declare array to store tee time IDs
+        
+        //Stores tee time IDs to be used in order to update database when booked
+        foreach ($result as $row) {
+           array_push($timesID, $row['teeTimeID']);
+        }
 
 /*//Checks if values pulled from database matches the the vakues in the times array declared above; checks if there are missing corresponding values>
 //---------------------------------------------------------------> 
@@ -171,7 +181,6 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     }
     ?>
     <table class="timeTable">
-        <!Have to make loop to iterate through array and display as table>
         <?php
         /* Note: Change $bookedTimes variable below to $missingTimes if changed above*/
         //Loop displays tee time buttons
@@ -180,19 +189,19 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             if ($bookedTimes[$x] == 1 && $x == 0) {
                 echo "<tr><td><button class='btn_off'>$times[$x]</div></td>";
             } else if ($bookedTimes[$x] != 1 && $x == 0) {
-                echo"<tr><td><button class='btn' style='cursor:pointer;' onclick=refreshTime('" . $times[$x] . "')>$times[$x]</button></td>";
+                echo"<tr><td><button class='btn' style='cursor:pointer;' onclick=refreshTime('" . $times[$x] . "','" . $timesID[$x] . "')>$times[$x]</button></td>";
             } else if ($bookedTimes[$x] != 1 && ($x + 1) % 4 == 0 && ( $x != count($times) - 1) && $x != 0) {
-                echo "<td><button class='btn' style='cursor:pointer;' onclick=refreshTime('" . $times[$x] . "')>$times[$x]</button></td></tr><tr>";
+                echo "<td><button class='btn' style='cursor:pointer;' onclick=refreshTime('" . $times[$x] . "','" . $timesID[$x] . "')>$times[$x]</button></td></tr><tr>";
             } else if ($bookedTimes[$x] == 1 && ($x + 1) % 4 == 0 && ( $x != count($times) - 1) && $x != 0) {
                 echo "<td><button class='btn_off'>$times[$x]</button></td></tr><tr>";
             } else if ($bookedTimes[$x] == 1 && $x == (count($times) - 1)) {
                 echo "<td><button class='btn_off'>$times[$x]</button></td></tr>";
             } else if ($bookedTimes[$x] != 1 && $x == (count($times) - 1)) {
-                echo "<td><button class='btn' onclick=refreshTime('" . $times[$x] . "')>$times[$x]</button></td></tr>";
+                echo "<td><button class='btn' onclick=refreshTime('" . $times[$x] . "','" . $timesID[$x] . "')>$times[$x]</button></td></tr>";
             } else if ($bookedTimes[$x] == 1 && $x != 0) {
                 echo "<td><button class='btn_off'>$times[$x]</button></td>";
             } else
-                echo "<td><button class='btn' style='cursor:pointer;' onclick=refreshTime('" . $times[$x] . "')>$times[$x]</button></td>";
+                echo "<td><button class='btn' style='cursor:pointer;' onclick=refreshTime('" . $times[$x] . "','" . $timesID[$x] . "')>$times[$x]</button></td>";
         }
         ?>
     </table>
@@ -207,17 +216,32 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
 <!--<script src="/Users/akbazuka/Desktop/kedlena/teeItUp/jsFiles/teeTimesJS.js"></script>-->
 <script>
+    
     var selectedTime = "";
+    var selectedTimeID = "";
 
-    function refreshTime(x)
+    function refreshTime(x,y)
     {
         selectedTime = x;
+        selectedTimeID = y;
+        console.log(selectedTime);
+        console.log(selectedTimeID);
     }
 
     function clickedBookButton()
     {
         //alert('You booked a tee time at ' +  selectedTime + ' on 10/01/19');
         swal("Congrats!", "You booked a tee time at " + selectedTime + " on 10/01/19", "success");
+        
+        //Ajax method to insert into booked table in database and update tee times table
+        $.ajax({
+            type: "POST",
+            url: "pushBookingsAjax.php",
+            data: {selectedTimeID: selectedTimeID},
+            success: function (data) {
+                console.log(data);
+            }
+        });
     }
 
     function changeBook(x, y, z, a)

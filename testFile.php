@@ -1,14 +1,14 @@
 <?php
-/*include_once "title.php";
+/* include_once "title.php";
 
-// Initialize the session
-session_start();
+  // Initialize the session
+  session_start();
 
-// Check if the user is logged in, if not then redirect him to login page
-if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-    header("location: login.php");
-    exit;
-}
+  // Check if the user is logged in, if not then redirect him to login page
+  if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+  header("location: login.php");
+  exit;
+  }
  */
 ?>
 
@@ -18,19 +18,20 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 <link rel="stylesheet" type="text/css" href="cssFiles/teeTimesCSS.css"/>
 
 <body>
-    <br>
-    <div class="user">
-        &ensp;Signed in as <b><?php echo "<em>" . htmlspecialchars($_SESSION["username"]) . "</em>"; ?></b>
-        <a href="logout.php" class="btn1 btn-danger" style="position: absolute; right: 30;">Sign Out</a>
-    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> <!Import jQuery>
+<br>
+<div class="user">
+    &ensp;Signed in as <b><?php echo "<em>" . htmlspecialchars($_SESSION["username"]) . "</em>"; ?></b>
+    <a href="logout.php" class="btn1 btn-danger" style="position: absolute; right: 30;">Sign Out</a>
+</div>
 <center>
     <br>
     <br>
     <!--<span id="subtitle">&ensp;<?php
-                //echo "Tee-times for Ko'olau Golf Club";
-                //echo "<style> body {background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmoNGIPL3FogIO41FRiln3Dhy0LwMdevqSEGLC5O0-ssVKfyyOEA'); background-repeat: no-repeat; background-attachment: scroll; background-position: 50% 116%; background-size: 800px 450px;}</style>";
-                $courseID = 1;
-        ?><!&ensp;>
+    //echo "Tee-times for Ko'olau Golf Club";
+    //echo "<style> body {background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmoNGIPL3FogIO41FRiln3Dhy0LwMdevqSEGLC5O0-ssVKfyyOEA'); background-repeat: no-repeat; background-attachment: scroll; background-position: 50% 116%; background-size: 800px 450px;}</style>";
+    $courseID = 1;
+    ?><!&ensp;>
     </span>-->
 
     <br><br><br><br><br>
@@ -49,82 +50,87 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        /*//For checking if there are missing times
-        $stmt = $conn->prepare("SELECT (`teeDateTime`) FROM `teeTime` WHERE `golfCourseID`='" . $courseID . "'");
+        /* //For checking if there are missing times
+          $stmt = $conn->prepare("SELECT (`teeDateTime`) FROM `teeTime` WHERE `golfCourseID`='" . $courseID . "'");
          * */
-        
+
         //For checking what the booked times are
         $stmt = $conn->prepare("SELECT * FROM `teeTime` WHERE `golfCourseID`='" . $courseID . "'");
-        
+
         $stmt->execute();
         // set the resulting array to associative  
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
+
         //echo print_r($result);
-        
+
         $bookedTimes = array();
-        
-         foreach ($result as $row) { 
-             array_push($bookedTimes,$row['booked']);
-         }
-         
-         //echo "These are the booked tee times: ".print_r($bookedTimes);
-              
-/*Checks if values pulled from database matches the the vakues in the times array declared above; checks if there are missing corresponding values>*/
-/*------------------------------------------------------------> 
-//        $what = new DateTime($result[10]["teeDateTime"]);
-//        $what = $what->format('H:i');
-//        echo "What is an: ".gettype($what)."\n";
-//        echo "What is: ".$what;      
-        $formatTimes=array(); 
 
         foreach ($result as $row) {
-            $timeString = new DateTime($row["teeDateTime"]);
-            $timeString = $timeString->format('H:i');
-            //Convert to readable 
-            //$formatTimes[]=substr(($row['teeDateTime']->format('H:i:s')), 0, 2).":".substr(($row['teeDateTime']->format('H:i:s')), 3, 2);
-            array_push($formatTimes, $timeString);
+            array_push($bookedTimes, $row['booked']);
         }
-        //echo sizeof($formatTimes);
         
-        echo "These are the formatted Times: ".print_r($formatTimes);
+        $timesID = array();
         
-//        echo "\nThis is the second format time: ".$formatTimes[1];
-//        echo "\nThis is the second time: ".$times[1];
-//        
-        if($times[11]==$formatTimes[10])
-            echo "\nTrue or false: True";
-        else echo "\nTrue or false: False";
-        
-        echo "\nThis is the size of the array times: ".sizeof($times);
-        echo "\nThis is the size of the array formatTimes: ".sizeof($formatTimes)."\n";
+        foreach ($result as $row) {
+           array_push($timesID, $row['teeTimeID']);
+        }
 
-        $missingTimes = array();
-        //Check if times are booked so can turn off corresponding button later;
-        for ($i = 0; $i < sizeof($times); $i++) {
-            $missingTime = 1; //Defualt- yes, it's missing
-            for ($j = 0; $j < sizeof($formatTimes); $j++) {
-                //If time found
-                if ($times[$i] == $formatTimes[$j]) { 
-                    $missingTime = 0;
-                    break;
-                }
-            }
-                array_push($missingTimes,$missingTime);
-        }
-        
-        echo "\nThese are the missing times: ".print_r($missingTimes);
+        //echo "These are the booked tee times: ".print_r($bookedTimes);
 
-        if (empty($missingTimes)) {
-            array_push($missingTimes,-1);
-        }
-        
-        echo "\nThese are the missing times Pt 2.: ".print_r($missingTimes);
-        
-        echo "\nThis is the vaue at 0: ".$missingTimes[11];
- * -------------------------------------------------------------------------------------->
- */
-        
+        /* Checks if values pulled from database matches the the vakues in the times array declared above; checks if there are missing corresponding values> */
+        /* ------------------------------------------------------------> 
+          //        $what = new DateTime($result[10]["teeDateTime"]);
+          //        $what = $what->format('H:i');
+          //        echo "What is an: ".gettype($what)."\n";
+          //        echo "What is: ".$what;
+          $formatTimes=array();
+
+          foreach ($result as $row) {
+          $timeString = new DateTime($row["teeDateTime"]);
+          $timeString = $timeString->format('H:i');
+          //Convert to readable
+          //$formatTimes[]=substr(($row['teeDateTime']->format('H:i:s')), 0, 2).":".substr(($row['teeDateTime']->format('H:i:s')), 3, 2);
+          array_push($formatTimes, $timeString);
+          }
+          //echo sizeof($formatTimes);
+
+          echo "These are the formatted Times: ".print_r($formatTimes);
+
+          //        echo "\nThis is the second format time: ".$formatTimes[1];
+          //        echo "\nThis is the second time: ".$times[1];
+          //
+          if($times[11]==$formatTimes[10])
+          echo "\nTrue or false: True";
+          else echo "\nTrue or false: False";
+
+          echo "\nThis is the size of the array times: ".sizeof($times);
+          echo "\nThis is the size of the array formatTimes: ".sizeof($formatTimes)."\n";
+
+          $missingTimes = array();
+          //Check if times are booked so can turn off corresponding button later;
+          for ($i = 0; $i < sizeof($times); $i++) {
+          $missingTime = 1; //Defualt- yes, it's missing
+          for ($j = 0; $j < sizeof($formatTimes); $j++) {
+          //If time found
+          if ($times[$i] == $formatTimes[$j]) {
+          $missingTime = 0;
+          break;
+          }
+          }
+          array_push($missingTimes,$missingTime);
+          }
+
+          echo "\nThese are the missing times: ".print_r($missingTimes);
+
+          if (empty($missingTimes)) {
+          array_push($missingTimes,-1);
+          }
+
+          echo "\nThese are the missing times Pt 2.: ".print_r($missingTimes);
+
+          echo "\nThis is the vaue at 0: ".$missingTimes[11];
+         * -------------------------------------------------------------------------------------->
+         */
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
@@ -134,33 +140,33 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         <?php
         for ($x = 0; $x < sizeof($times); $x++) {
 
-            if ($bookedTImes[$x] == 1 && $x == 0) {
+            if ($bookedTimes[$x] == 1 && $x == 0) {
                 echo "<tr><td><button class='btn_off'>$times[$x]</div></td>";
             } else if ($bookedTimes[$x] != 1 && $x == 0) {
-                echo"<tr><td><button class='btn' style='cursor:pointer;' onclick=refreshTime('" . $times[$x] . "')>$times[$x]</button></td>";
+                echo"<tr><td><button class='btn' style='cursor:pointer;' onclick=refreshTime('" . $times[$x] . "','" . $timesID[$x] . "')>$times[$x]</button></td>";
             } else if ($bookedTimes[$x] != 1 && ($x + 1) % 4 == 0 && ( $x != count($times) - 1) && $x != 0) {
-                echo "<td><button class='btn' style='cursor:pointer;' onclick=refreshTime('" . $times[$x] . "')>$times[$x]</button></td></tr><tr>";
+                echo "<td><button class='btn' style='cursor:pointer;' onclick=refreshTime('" . $times[$x] . "','" . $timesID[$x] . "')>$times[$x]</button></td></tr><tr>";
             } else if ($bookedTimes[$x] == 1 && ($x + 1) % 4 == 0 && ( $x != count($times) - 1) && $x != 0) {
                 echo "<td><button class='btn_off'>$times[$x]</button></td></tr><tr>";
             } else if ($bookedTimes[$x] == 1 && $x == (count($times) - 1)) {
                 echo "<td><button class='btn_off'>$times[$x]</button></td></tr>";
             } else if ($bookedTimes[$x] != 1 && $x == (count($times) - 1)) {
-                echo "<td><button class='btn' onclick=refreshTime('" . $times[$x] . "')>$times[$x]</button></td></tr>";
+                echo "<td><button class='btn' onclick=refreshTime('" . $times[$x] . "','" . $timesID[$x] . "')>$times[$x]</button></td></tr>";
             } else if ($bookedTimes[$x] == 1 && $x != 0) {
                 echo "<td><button class='btn_off'>$times[$x]</button></td>";
             } else
-                echo "<td><button class='btn' style='cursor:pointer;' onclick=refreshTime('" . $times[$x] . "')>$times[$x]</button></td>";
+                echo "<td><button class='btn' style='cursor:pointer;' onclick=refreshTime('" . $times[$x] . "','" . $timesID[$x] . "')>$times[$x]</button></td>";
         }
         ?>
     </table>
     <!--
     <br>
     <button id="book" class="bookButton" type="button" onmouseover="changeBook('white', '40px', 'seagreen', 'bold')" onclick="clickedBookButton()" onmouseout="changeBook('black', '30px', 'white', 'normal')">Book!</button>
-    <div class="bttn" onclick="if (selectedTime !== '') {
+    -->    <div class="bttn" onclick="if (selectedTime !== '') {
                 clickedBookButton();
             }">
-    <p>Book!</p>
-    </div>
+        <p>Book!</p>
+    </div><!--
     
     <div>
         <p style="color: black; font-size: 40px;">Hello</p>
@@ -169,17 +175,60 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
 <!--<script src="/Users/akbazuka/Desktop/kedlena/teeItUp/jsFiles/teeTimesJS.js"></script>-->
 <script>
-    var selectedTime = "";
 
-    function refreshTime(x)
+//    //Have to install mysql to computer for this
+//    var mysql = require('mysql');
+//
+//    var con = mysql.createConnection({
+//        host: "localhost",
+//        user: "kedlaya",
+//        password: "releasethekraken!",
+//        database: "teeItUp"
+//    });
+//
+//    con.connect(function (err) {
+//        if (err)
+//            throw err;
+//        con.query("SELECT * FROM `teeTime`", function (err, result, fields) {
+//            if (err)
+//                throw err;
+//            console.log(result);
+//        });
+//    });
+
+    var selectedTime = "";
+    var selectedTimeID = ""
+
+    function refreshTime(x,y)
     {
         selectedTime = x;
+        selectedTimeID = y;
+        console.log("The selected time is: " + selectedTime);
     }
+
+//    var databaseArray = JSON.parse('<?php // echo json_encode($result)   ?>');
+    //console.log("This is the database array: " + databaseArray[10]['teeTimeID']);
 
     function clickedBookButton()
     {
         //alert('You booked a tee time at ' +  selectedTime + ' on 10/01/19');
         swal("Congrats!", "You booked a tee time at " + selectedTime + " on 10/01/19", "success");
+
+        $.ajax({
+            type: "POST",
+            url: "pushBookingsAjax.php",
+            data: {selectedTimeID},
+            success: function (data) {
+                console.log(data);
+            }
+        });
+        
+        //Insert into bookings table
+<?php
+//            //Have to change to pull userID form database so can push here.
+//            $toSQL = $conn->prepare("INSERT INTO `bookings` (`bookingID`, `userID`, `teeTimeID`) VALUES (NULL, '1','".selectedTime."')");
+//            $toSQL->execute(); 
+?>
     }
 
     function changeBook(x, y, z, a)
