@@ -137,7 +137,7 @@ div.user
     display: inline-block;
     padding: 6px 12px;
     margin-bottom: 0;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: normal;
     line-height: 1.42857143;
     text-align: center;
@@ -281,6 +281,92 @@ fieldset[disabled] .btn-warning.focus {
 }
 
 .btn-warning .badge {
+    color: #f0ad4e;
+    background-color: #fff;
+}
+
+.btn-bookings {
+    display: inline-block;
+    text-decoration: none;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid white;
+    border-radius: 4px;
+    color: #fff;
+    background-color: cadetblue;
+    border-color: white;
+}
+
+.btn-bookings:focus,
+.btn-bookings.focus {
+    color: #fff;
+    background-color: cadetblue;
+    border-color: white;
+}
+
+.btn-bookings:hover {
+    color: #fff;
+    background-color: darkcyan;
+    border-color: white;
+    border-width: 2px;
+}
+
+.btn-bookings:active,
+.btn-bookings.active,
+.open > .dropdown-toggle.btn-warning {
+    color: #fff;
+    background-color: cadetblue;
+    border-color: white;
+}
+
+.btn-bookings:active:hover,
+.btn-bookings.active:hover,
+.open > .dropdown-toggle.btn-bookings:hover,
+.btn-bookings:active:focus,
+.btn-bookings.active:focus,
+.open > .dropdown-toggle.btn-bookings:focus,
+.btn-bookings:active.focus,
+.btn-bookings.active.focus,
+.open > .dropdown-toggle.btn-bookings.focus {
+    color: #fff;
+    background-color: cadetblue;
+    border-color: white;
+}
+
+.btn-bookings:active,
+.btn-bookings.active,
+.open > .dropdown-toggle.btn-bookings {
+    background-image: none;
+}
+
+.btn-bookings.disabled:hover,
+.btn-bookings[disabled]:hover,
+fieldset[disabled] .btn-bookings:hover,
+.btn-bookings.disabled:focus,
+.btn-bookings[disabled]:focus,
+fieldset[disabled] .btn-bookings:focus,
+.btn-bookings.disabled.focus,
+.btn-bookings[disabled].focus,
+fieldset[disabled] .btn-bookings.focus {
+    background-color: lightgray;
+    border-color: white;
+}
+
+ .btn-bookings .badge {
     color: #f0ad4e;
     background-color: #fff;
 }

@@ -22,12 +22,12 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     
     <br>
     <div class="user">
-        &ensp;Signed in as <b><?php echo "<em>" . htmlspecialchars($_SESSION["username"]) . "</em>"; ?></b>
+        &ensp;Welcome <b><?php echo "<em>" . htmlspecialchars($_SESSION["username"]) . "</em>"; ?></b>
+        <a href="viewBookings.php" class="btn-bookings" style="position: absolute; left: 300; top: 228;">View My Bookings</a>
         <a href="logout.php" class="btn1 btn-danger" style="position: absolute; right: 30;">Sign Out</a>
     </div>
 <center>
-    <br>
-    <br>
+    <br><br><br><br>
     <span id="subtitle">&ensp;<?php
         $courseName = $_GET['courseName'];
         $courseID = 0;
@@ -205,7 +205,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         }
         ?>
     </table>
-    <br>
+    <br><br><br>
     <!--<button id="book" class="bookButton" type="button" onmouseover="changeBook('white', '40px', 'seagreen', 'bold')" onclick="clickedBookButton()" onmouseout="changeBook('black', '30px', 'white', 'normal')">Book!</button>-->
     <div class="bttn" onclick="if (selectedTime !== '') {
                 clickedBookButton();

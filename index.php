@@ -21,9 +21,10 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <br>
     <div class="user">
-        &ensp;Welcome, <b><?php echo "<em>" . htmlspecialchars($_SESSION["username"]) . "</em>"; ?></b>
-        <a href="logout.php" class="btn btn-danger" style="position: absolute; right: 30;">Sign Out</a>
-        <a href="reset-password.php" class="btn btn-warning" style="position: absolute; right: 120;">Reset Your Password</a>
+        &ensp;Welcome, <b><?php echo "<em>" . htmlspecialchars($_SESSION["username"]) . "</em>"; ?></b> 
+        <a href="viewBookings.php" class="btn-bookings" style="position: absolute; left: 300; top: 228;">View My Bookings</a>
+        <a href="logout.php" class="btn btn-danger" style="position: absolute; right: 30; top: 228;">Sign Out</a>
+        <a href="reset-password.php" class="btn btn-warning" style="position: absolute; right: 120; top: 228;">Reset My Password</a>
     </div>
 <center>
 
