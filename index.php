@@ -15,17 +15,28 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 <head> 
     <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">-->
     <link rel="stylesheet" type="text/css" href="cssFiles/indexCSS.css">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Dropdown Hover CSS -->
+    <link href="cssFiles/dropDownCSS/animate.min.css" rel="stylesheet">
+    
+    <link href="cssFiles/dropDownCSS/bootstrap-dropdownhover.min.css" rel="stylesheet">
 </head>
 
-<body>
+<body style="background-color: black;">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!--Bootstrap JS-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <!-- Bootstrap Dropdown Hover JS -->
+    <script src="jsFiles/dropDownJS/bootstrap-dropdownhover.min.js"></script>
+
     <br>
-    <div class="user">
-        &ensp;Welcome, <b><?php echo "<em>" . htmlspecialchars($_SESSION["username"]) . "</em>"; ?></b> 
-        <a href="viewBookings.php" class="btn-bookings" style="position: absolute; left: 300; top: 228;">View My Bookings</a>
-        <a href="logout.php" class="btn btn-danger" style="position: absolute; right: 30; top: 228;">Sign Out</a>
-        <a href="reset-password.php" class="btn btn-warning" style="position: absolute; right: 120; top: 228;">Reset My Password</a>
-    </div>
+<?php include_once 'includeMenu.php'; ?>
+<br><br><br>
 <center>
 
     <?php
@@ -34,7 +45,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         $username = "kedlaya";
         $password = "releasethekraken!";
         $databasename = "teeItUp";
-        
+
         /* Attempt to connect to MySQL database */
         $conn = new PDO("mysql:host=$servername;dbname=$databasename", $username, $password);
 
@@ -44,18 +55,18 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         $stmt->execute();
         // set the resulting array to associative  
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
+
         $j = 1;
-        
+
         foreach ($result as $row) {
-            
-            echo "<div class='box' id='box".$j."'>
-        <a class='courses' target='_self' href='teeTimes.php?courseName=".$row['htmlIDName']."' onmouseover='boxHover(\"box".$j."\", \"crimson\")' onmouseout='boxHover(\"box".$j."\", \"green\")'>
-            <img src='" . $row['courseImageLink'] . "'>
+
+            echo "<div class='box' id='box" . $j . "'>
+        <a class='courses' target='_self' href='teeTimes.php?courseName=" . $row['htmlIDName'] . "' onmouseover='boxHover(\"box" . $j . "\", \"crimson\")' onmouseout='boxHover(\"box" . $j . "\", \"green\")'>
+            <img src='" . $row['courseImageLink'] . "' style='width: 100%; height: auto;'>
             <div class='desc'>" . $row['golfCourseName'] . "</div>
         </a>
-        <div class='popup topright' onclick='popUp(\"".$row['htmlIDName']."\")'>i
-            <span class='popuptext' id='".$row['htmlIDName']."'>Hours: ".$row['courseHours']."<br>Phone: ".$row['coursePhone']."</span>
+        <div class='popup topright' onclick='popUp(\"" . $row['htmlIDName'] . "\")'>i
+            <span class='popuptext' id='" . $row['htmlIDName'] . "'>Hours: " . $row['courseHours'] . "<br>Phone: " . $row['coursePhone'] . "</span>
         </div>
     </div>";
             $j++;

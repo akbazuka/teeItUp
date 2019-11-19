@@ -1,14 +1,14 @@
 <?php
-        include_once "title.php";
+include_once "title.php";
 
 // Initialize the session
-        session_start();
+session_start();
 
 // Check if the user is logged in, if not then redirect him to login page
-        if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-            header("location: login.php");
-            exit;
-        }
+if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+    header("location: login.php");
+    exit;
+}
 ?>
 <html style="background-color: black">
     <link href='https://fonts.googleapis.com/css?family=Charm' rel='stylesheet'>
@@ -24,14 +24,17 @@
     <link rel="stylesheet" type="text/css" href="cssFiles/addons/datatables-select.min.css"/>
 
     <link rel="stylesheet" href="cssFiles/tableView.css">
+    
+    <!-- Bootstrap Dropdown Hover CSS -->
+    <link href="cssFiles/dropDownCSS/animate.min.css" rel="stylesheet">
+    
+    <link href="cssFiles/dropDownCSS/bootstrap-dropdownhover.min.css" rel="stylesheet">
 
     <body style="background-color: black;">
         <br>
-        <div class="user">
-            &ensp;Welcome <b><?php echo "<em>" . htmlspecialchars($_SESSION["username"]) . "</em>"; ?></b>
-            <a href="logout.php" class="btn1 btn-danger" style="position: absolute; right: 30;">Sign Out</a>
-        </div>
-<?php
+<?php include_once 'includeMenu.php'; ?>
+        
+        <?php
         try {
             $servername = "localhost";
             $username = "kedlaya";
@@ -68,7 +71,7 @@
                 $stmt3->execute();
                 $result3 = $stmt3->fetchAll(PDO::FETCH_ASSOC);
                 //Convert to proper format date and time and push to separate arrays
-                $dates_times = (explode(" ", date('Y-m-d H:i:s', strtotime($result3[0]['teeDateTime']))));
+                $dates_times = (explode(" ", date('Y-m-d H:i', strtotime($result3[0]['teeDateTime']))));
                 $times = $dates_times[1];
                 $dates = $dates_times[0];
                 array_push($teeTimes, $times);
@@ -120,7 +123,6 @@
       <td>" . $teeDates[$i] . "</td>
       <td>" . $teeTimes[$i] . "</td>
       <td>" . $golfCourseNames[$i] . "</td>
-      <td>
     </tr>";
             }
 
@@ -135,6 +137,9 @@
         <script src="jsFiles/addons/datatables-select.min.js"></script>
         <!-- Latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        
+        <!-- Bootstrap Dropdown Hover JS -->
+        <script src="jsFiles/dropDownJS/bootstrap-dropdownhover.min.js"></script>
 
 <!--<script src="jsFiles/vendor/modernizr-3.7.1.min.js"></script>-->
 

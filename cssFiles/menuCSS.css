@@ -1,0 +1,189 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 18/11/2019, 11:02:07 PM
+    Author     : akbazuka
+*/
+
+div.user
+{
+    color: white;
+    font-size: 250%;
+}
+
+.btn1 {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid white;
+    border-radius: 4px;
+}
+
+.btn1-bookings {
+    display: inline-block;
+    text-decoration: none;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid white;
+    border-radius: 4px;
+    color: #fff;
+    background-color: cadetblue;
+    border-color: white;
+}
+
+.btn1-bookings:focus,
+.btn1-bookings.focus {
+    color: #fff;
+    background-color: cadetblue;
+    border-color: white;
+}
+
+.btn1-bookings:hover {
+    color: #fff;
+    background-color: darkcyan;
+    border-color: white;
+    border-width: 2px;
+    text-decoration: none !important;
+}
+
+.btn1-bookings:active,
+.btn1-bookings.active,
+.open > .dropdown-toggle.btn1-warning {
+    color: #fff;
+    background-color: cadetblue;
+    border-color: white;
+}
+
+.btn1-bookings:active:hover,
+.btn1-bookings.active:hover,
+.open > .dropdown-toggle.btn1-bookings:hover,
+.btn1-bookings:active:focus,
+.btn1-bookings.active:focus,
+.open > .dropdown-toggle.btn1-bookings:focus,
+.btn1-bookings:active.focus,
+.btn1-bookings.active.focus,
+.open > .dropdown-toggle.btn1-bookings.focus {
+    color: #fff;
+    background-color: cadetblue;
+    border-color: white;
+}
+
+.btn1-bookings:active,
+.btn1-bookings.active,
+.open > .dropdown-toggle.btn1-bookings {
+    background-image: none;
+}
+
+.btn1-bookings.disabled:hover,
+.btn1-bookings[disabled]:hover,
+fieldset[disabled] .btn1-bookings:hover,
+.btn1-bookings.disabled:focus,
+.btn1-bookings[disabled]:focus,
+fieldset[disabled] .btn1-bookings:focus,
+.btn1-bookings.disabled.focus,
+.btn1-bookings[disabled].focus,
+fieldset[disabled] .btn1-bookings.focus {
+    background-color: lightgray;
+    border-color: white;
+}
+
+ .btn1-bookings .badge {
+    color: #f0ad4e;
+    background-color: #fff;
+}
+
+.btn1-home {
+    color: #fff;
+    background-color: seagreen;
+    border-color: white;
+}
+.btn1-home:focus,
+.btn1-home.focus {
+    color: #fff;
+    background-color: darkgreen !important;
+    border-color: white;
+}
+.btn1-home:hover {
+    color: #fff;
+    background-color: darkgreen !important;
+    border-color: whitesmoke;
+    border-width: 2px;
+}
+
+.btn1-home:active,
+.btn1-home.active,
+.open > .dropdown-toggle.btn1-home {
+    color: #fff;
+    background-color: seagreen;
+    border-color: whitesmoke;
+}
+
+.btn1-home:active:hover,
+.btn1-home.active:hover,
+.open > .dropdown-toggle.btn1-home:hover,
+.btn1-home:active:focus,
+.btn1-home.active:focus,
+.open > .dropdown-toggle.btn1-home:focus,
+.btn1-home:active.focus,
+.btn1-home.active.focus,
+.open > .dropdown-toggle.btn1-home.focus {
+    color: #fff;
+    background-color: darkgreen;
+    border-color: whitesmoke;
+}
+
+.btn1-home:active,
+.btn1-home.active,
+.open > .dropdown-toggle.btn1-home {
+    background-image: none;
+}
+
+.btn1-home.disabled:hover,
+.btn1-home[disabled]:hover,
+fieldset[disabled] .btn1-home:hover,
+.btn1-home.disabled:focus,
+.btn1-home[disabled]:focus,
+fieldset[disabled] .btn1-home:focus,
+.btn1-home.disabled.focus,
+.btn1-home[disabled].focus,
+fieldset[disabled] .btn1-home.focus {
+    background-color: #d9534f;
+    border-color: white;
+}
+
+.btn1-home .badge {
+    color: #d9534f;
+    background-color: #fff;
+}
+

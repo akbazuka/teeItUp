@@ -7,6 +7,40 @@ and open the template in the editor.
     Created on : 17/11/2019, 3:19:39 PM
     Author     : akbazuka
 */
+/*Table Position on Screen*/
+
+/*@media (min-width: 1200px) {
+    .container {
+        max-width: 1200px;
+        background-color: white;
+        border-radius: 10px;
+        border: 5px;
+        border-color: lightseagreen;
+    }
+}*/
+
+.outer {
+    display: table;
+    position: relative;
+    top: 20%;
+    bottom:0;
+    left: 0;
+/*    height: 75%;*/
+    width: 100%;
+}
+.middle {
+    display: table-cell;
+    vertical-align: middle;
+}
+.inner {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%; /*Width of table horizontally on screen*/
+    border: 3px solid seagreen;
+    border-radius: 20px;
+    background-color: white;
+    padding: 20px;
+}
 
 table.dataTable thead .sorting:after,
 table.dataTable thead .sorting:before,

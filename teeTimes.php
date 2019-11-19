@@ -16,16 +16,27 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 <!--<link rel="stylesheet" href="//brick.a.ssl.fastly.net/Roboto:400"/>-->
 <link rel="stylesheet" type="text/css" href="cssFiles/teeTimesCSS.css"/>
 
-<body>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Dropdown Hover CSS -->
+    <link href="cssFiles/dropDownCSS/animate.min.css" rel="stylesheet">
+    
+    <link href="cssFiles/dropDownCSS/bootstrap-dropdownhover.min.css" rel="stylesheet">
+
+<body style="background-color: black;">
     <!import jQuery>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     
+    <!--Bootstrap JS-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <!-- Bootstrap Dropdown Hover JS -->
+    <script src="jsFiles/dropDownJS/bootstrap-dropdownhover.min.js"></script>
+
     <br>
-    <div class="user">
-        &ensp;Welcome <b><?php echo "<em>" . htmlspecialchars($_SESSION["username"]) . "</em>"; ?></b>
-        <a href="viewBookings.php" class="btn-bookings" style="position: absolute; left: 300; top: 228;">View My Bookings</a>
-        <a href="logout.php" class="btn1 btn-danger" style="position: absolute; right: 30;">Sign Out</a>
-    </div>
+<?php include_once 'includeMenu.php'; ?>
+    <br><br>
 <center>
     <br><br><br><br>
     <span id="subtitle">&ensp;<?php
@@ -189,19 +200,19 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             if ($bookedTimes[$x] == 1 && $x == 0) {
                 echo "<tr><td><button class='btn_off'>$times[$x]</div></td>";
             } else if ($bookedTimes[$x] != 1 && $x == 0) {
-                echo"<tr><td><button class='btn' style='cursor:pointer;' onclick=refreshTime('" . $times[$x] . "','" . $timesID[$x] . "')>$times[$x]</button></td>";
+                echo"<tr><td><button class='btnOn' style='cursor:pointer;' onclick=refreshTime('" . $times[$x] . "','" . $timesID[$x] . "')>$times[$x]</button></td>";
             } else if ($bookedTimes[$x] != 1 && ($x + 1) % 4 == 0 && ( $x != count($times) - 1) && $x != 0) {
-                echo "<td><button class='btn' style='cursor:pointer;' onclick=refreshTime('" . $times[$x] . "','" . $timesID[$x] . "')>$times[$x]</button></td></tr><tr>";
+                echo "<td><button class='btnOn' style='cursor:pointer;' onclick=refreshTime('" . $times[$x] . "','" . $timesID[$x] . "')>$times[$x]</button></td></tr><tr>";
             } else if ($bookedTimes[$x] == 1 && ($x + 1) % 4 == 0 && ( $x != count($times) - 1) && $x != 0) {
                 echo "<td><button class='btn_off'>$times[$x]</button></td></tr><tr>";
             } else if ($bookedTimes[$x] == 1 && $x == (count($times) - 1)) {
                 echo "<td><button class='btn_off'>$times[$x]</button></td></tr>";
             } else if ($bookedTimes[$x] != 1 && $x == (count($times) - 1)) {
-                echo "<td><button class='btn' onclick=refreshTime('" . $times[$x] . "','" . $timesID[$x] . "')>$times[$x]</button></td></tr>";
+                echo "<td><button class='btnOn' onclick=refreshTime('" . $times[$x] . "','" . $timesID[$x] . "')>$times[$x]</button></td></tr>";
             } else if ($bookedTimes[$x] == 1 && $x != 0) {
-                echo "<td><button class='btn_off'>$times[$x]</button></td>";
-            } else
-                echo "<td><button class='btn' style='cursor:pointer;' onclick=refreshTime('" . $times[$x] . "','" . $timesID[$x] . "')>$times[$x]</button></td>";
+                echo "<td><button class='btn_off'>$times[$x]</button></td>"; 
+           } else
+                echo "<td><button class='btnOn' style='cursor:pointer;' onclick=refreshTime('" . $times[$x] . "','" . $timesID[$x] . "')>$times[$x]</button></td>";
         }
         ?>
     </table>
