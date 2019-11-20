@@ -1,3 +1,4 @@
+<html style="background-image: url(images/bgImg.jpg); background-size: cover;">
 <?php
 //Include title
 include_once 'title.php';
@@ -74,9 +75,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     mysqli_close($link);
 }
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
     <head>
         <meta charset="UTF-8">
         <title>Login</title>
@@ -91,7 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             .outer {
                 display: table;
                 position: absolute;
-                top: 25%;
+/*                top: 25%;*/
                 bottom:0;
                 left: 0;
                 height: 80%;
@@ -112,7 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         </style>
     </head>
-    <body>
+    <body style="background-color: transparent;">
         <div class="outer">
             <div class="middle">
                 <div class="inner">

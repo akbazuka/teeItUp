@@ -1,7 +1,7 @@
 html
 {
     /*text-align:center;*/
-    background-color:black !important;
+    background-color:none important;
 }
 
 /* !important Overrides any a tag styling on other pages where this page is included*/
@@ -20,14 +20,34 @@ a.header:visited
 {
     /*font-family:Georgia;*/
     color:black;
-    background-color:seagreen;
+    background-color:transparent !important;
+    /*background-color:seagreen;*/
     /*top:0;//To make header stick to top*/
-    position: -webkit-sticky; /* In case run on Safari */
-    position:sticky;
-    border-style:ridge;
-    border-color: white;
-    border-radius: 10px;
+/*    position: -webkit-sticky;  In case run on Safari 
+    position:sticky;*/
+    /*border: white 2px;*/
+    /*border-radius: 10px;*/
     /*height:200px;*/
-    padding:3% 0;
+    /*padding:2% 0 0;*/
+    padding: 1% 0 1% 0;
+}
+
+.img1
+{
+    height:200px;
+}
+
+.titleHead
+{
+    font-size:430%;
+    /*text-decoration: underline;*/
+    text-decoration-color: black; 
+    font-family: 'Paprika';
+}
+
+.titleSub
+{
+    font-size:200%; 
+    /*font-family: 'sans-serif';*/
 }
 

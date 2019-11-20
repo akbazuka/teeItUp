@@ -1,3 +1,4 @@
+<html style="background-image: url(images/bgImg.jpg); background-size: cover;">
 <?php
 //Include title
 include_once 'title.php';
@@ -10,6 +11,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     header("location: login.php");
     exit;
 }
+include_once 'includeMenu.php'; 
 ?>
 
 <head> 
@@ -25,7 +27,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     <link href="cssFiles/dropDownCSS/bootstrap-dropdownhover.min.css" rel="stylesheet">
 </head>
 
-<body style="background-color: black;">
+<body style="background-color: transparent; line-height: 1;">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <!--Bootstrap JS-->
@@ -34,9 +36,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     <!-- Bootstrap Dropdown Hover JS -->
     <script src="jsFiles/dropDownJS/bootstrap-dropdownhover.min.js"></script>
 
-    <br>
-<?php include_once 'includeMenu.php'; ?>
-<br><br><br>
+    <br><br>
 <center>
 
     <?php
@@ -57,20 +57,21 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $j = 1;
-
+        echo "<div class='container1'>";
         foreach ($result as $row) {
 
             echo "<div class='box' id='box" . $j . "'>
-        <a class='courses' target='_self' href='teeTimes.php?courseName=" . $row['htmlIDName'] . "' onmouseover='boxHover(\"box" . $j . "\", \"crimson\")' onmouseout='boxHover(\"box" . $j . "\", \"green\")'>
+        <a class='courses' target='_self' href='teeTimes.php?courseName=" . $row['golfCourseName'] . "&courseID=" . $row['golfCourseID'] . "' onmouseover='boxHover(\"box" . $j . "\", \"seagreen\", \"5px\"); boxHover(\"pop" . $j . "\", \"seagreen\", \"2px\");' onmouseout='boxHover(\"box" . $j . "\", \"black\", \"3px\"); boxHover(\"pop" . $j . "\", \"black\", \"2px\");'>
             <img src='" . $row['courseImageLink'] . "' style='width: 100%; height: auto;'>
             <div class='desc'>" . $row['golfCourseName'] . "</div>
         </a>
-        <div class='popup topright' onclick='popUp(\"" . $row['htmlIDName'] . "\")'>i
+        <div id='pop" . $j . "' class='popup topright' onclick='popUp(\"" . $row['htmlIDName'] . "\")'>i
             <span class='popuptext' id='" . $row['htmlIDName'] . "'>Hours: " . $row['courseHours'] . "<br>Phone: " . $row['coursePhone'] . "</span>
         </div>
     </div>";
             $j++;
         }
+        echo "</div>";
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
@@ -172,8 +173,10 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     });
 
 //Changes color of golf course container borders when hovering over link   
-    function boxHover(n, x) {
+    function boxHover(n, x, y) {
         document.getElementById(n).style.borderColor = x;
+        document.getElementById(n).style.color = x;
+        document.getElementById(n).style.borderWidth = y;    
     }
 
 //When the user clicks on div, open the popup

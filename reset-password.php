@@ -1,3 +1,4 @@
+<html style="background-image: url(images/bgImg.jpg); background-size: cover;">
 <?php
 include_once 'title.php';
 // Initialize the session
@@ -70,9 +71,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     mysqli_close($link);
 }
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
     <head>
         <meta charset="UTF-8">
         <title>Reset Password</title>
@@ -87,9 +85,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             .outer {
                 display: table;
                 position: absolute;
-                top: 25%;
+/*                top: 25%;*/
                 left: 0;
-                height: 80%;
+                height: 70%;
                 width: 100%;
             }
 
@@ -108,7 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 padding: 20px;
             </style>
         </head>
-        <body>
+        <body style="background-color: transparent;">
             <div class="outer">
                 <div class="middle">
                     <div class="inner">

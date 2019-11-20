@@ -1,3 +1,4 @@
+<html style="background-image: url(images/bgImg.jpg); background-size: cover;">
 <?php
 include_once "title.php";
 
@@ -9,8 +10,9 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     header("location: login.php");
     exit;
 }
+
+include_once 'includeMenu.php';
 ?>
-<html style="background-color: black">
     <link href='https://fonts.googleapis.com/css?family=Charm' rel='stylesheet'>
 
     <!Import Bootstrap>
@@ -30,10 +32,9 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     
     <link href="cssFiles/dropDownCSS/bootstrap-dropdownhover.min.css" rel="stylesheet">
 
-    <body style="background-color: black;">
+    <body style="background-color: transparent;">
         <br>
-<?php include_once 'includeMenu.php'; ?>
-        
+        <br>
         <?php
         try {
             $servername = "localhost";
@@ -126,7 +127,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     </tr>";
             }
 
-            echo "</table></div></div></div>";
+            echo "</table></div></div></div><br><br>";
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }

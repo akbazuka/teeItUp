@@ -8,18 +8,27 @@ body{
     max-width:1200px;
     margin:auto;*/
 }
+*@media (min-width: 1200px) {
+    .container1 {
+        max-width: 1340px;
+        background-color: transparent;
+/*        border-radius: 10px;
+        border: 5px;
+        border-color: lightseagreen;*/
+    }
+}
 .box 
 {
-    margin-left: 5%;
-    margin-right: 2%;
+    margin-left: 6%;
+    /*margin-right: 2%;*/
     margin-top: 3%;
     margin-bottom: 3%;
-    height: 31%;
-    border: 5px solid green;
+    height: 30%;
+    border: 3px solid black;
     float:left;
     width: 17%;
     padding: 4% 1%;
-    border-radius: 25px;
+    border-radius: 15px;
     background-color: white;
     position:relative;
     /*??Try
@@ -35,17 +44,18 @@ body{
 }
 a.courses
 {
-    color:seagreen;
-    font-weight: bold;
+    color:black;
+/*    font-weight: bold;*/
+    font-size: 16px;
 }
 a.courses:visited 
 {
-    color:seagreen;
+    color:black;
 }            
 a.courses:hover
 {
-    color:crimson !important;
-    border-color:crimson;
+    color:seagreen !important;
+/*    border-color:crimson;*/
 }
 div.desc 
 {
@@ -66,6 +76,12 @@ div.desc
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+.popup:hover
+{
+    border-color: seagreen !important;
+    color: seagreen !important;
 }
 
 /* The actual popup */

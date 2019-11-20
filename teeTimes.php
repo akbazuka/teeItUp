@@ -1,3 +1,4 @@
+<html style="background-image: url(images/bgImg.jpg); background-size: cover;">
 <?php
 include_once "title.php";
 
@@ -9,6 +10,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     header("location: login.php");
     exit;
 }
+
+include_once 'includeMenu.php';
 ?>
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -24,7 +27,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     
     <link href="cssFiles/dropDownCSS/bootstrap-dropdownhover.min.css" rel="stylesheet">
 
-<body style="background-color: black;">
+<body style="background: transparent;">
     <!import jQuery>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     
@@ -33,61 +36,61 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
     <!-- Bootstrap Dropdown Hover JS -->
     <script src="jsFiles/dropDownJS/bootstrap-dropdownhover.min.js"></script>
-
     <br>
-<?php include_once 'includeMenu.php'; ?>
-    <br><br>
+    
 <center>
-    <br><br><br><br>
+    <br><br>
     <span id="subtitle">&ensp;<?php
         $courseName = $_GET['courseName'];
-        $courseID = 0;
-        switch ($courseName) {
-            case "royal":
-                echo "Tee-times for Royal Hawaiian Golf Club";
-                echo "<style> body {background-image:url('https://cdn.shopify.com/s/files/1/0191/3924/products/royal3.jpg?v=1565999211'); background-repeat: no-repeat; background-attachment: scroll; background-position: 50% 116%; background-size: 800px 450px;}</style>";
-                $courseID = 1;
-                break;
-            case "koolau":
-                echo "Tee-times for Ko'olau Golf Club";
-                echo "<style> body {background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmoNGIPL3FogIO41FRiln3Dhy0LwMdevqSEGLC5O0-ssVKfyyOEA'); background-repeat: no-repeat; background-attachment: scroll; background-position: 50% 116%; background-size: 800px 450px;}</style>";
-                $courseID = 2;
-                break;
-            case "bayview":
-                echo "Tee-times for Bayview Golf Course";
-                echo "<style> body {background-image:url('https://cdn.shopify.com/s/files/1/0191/3924/products/website-2_47e4f125-a4b9-4680-a043-3bc5b02ff6cf.jpg?v=1566009408'); background-repeat: no-repeat; background-attachment: scroll; background-position: 50% 116%; background-size: 800px 450px;}</style>";
-                $courseID = 3;
-                break;
-            case "turtle":
-                echo "Tee-times for Turtle Bay Golf Resort";
-                echo "<style> body {background-image:url('https://www.turtlebayresort.com/sites/default/files/KamGolfPage_BookNow_4.jpg'); background-repeat: no-repeat; background-attachment: scroll; background-position: 50% 116%; background-size: 800px 450px;}</style>";
-                $courseID = 4;
-                break;
-            case "leilehua":
-                echo "Tee-times for Leilehua Golf Club";
-                echo "<style> body {background-image:url('https://millerdesigngolf.com/images/galleries/past_projects/leilehua_golf_course/Green_after_shot_8_green.jpg'); background-repeat: no-repeat; background-attachment: scroll; background-position: 50% 116%; background-size: 800px 450px;}</style>";
-                $courseID = 5;
-                break;
-            case "koolina":
-                echo "Tee-times for Ko'olina Golf Club";
-                echo "<style> body {background-image:url('https://cdn.shopify.com/s/files/1/0191/3924/products/newkoolina1_7e5b8ff8-893c-42f5-accb-33d6bfab44f8.jpg?v=1566006290'); background-repeat: no-repeat; background-attachment: fixed; background-position: 50% 116%; background-size: 800px 450px;}</style>";
-                $courseID = 6;
-                break;
-            case "kapolei":
-                echo "Tee-times for Kapolei Golf Course";
-                echo "<style> body {background-image:url('https://cdn.shopify.com/s/files/1/0191/3924/products/newkap5.jpg?v=1566007373'); background-repeat: no-repeat; background-attachment: scroll; background-position: 50% 116%; background-size: 800px 450px;}</style>";
-                $courseID = 7;
-                break;
-            case "alawai":
-                echo "Tee-times for Ala Wai Golf Club";
-                echo "<style> body {background-image:url('https://media-cdn.tripadvisor.com/media/photo-s/01/d6/7d/66/ala-wai-golf-course-from.jpg'); background-repeat: no-repeat; background-attachment: scroll; background-position: 50% 116%; background-size: 800px 450px;}</style>";
-                $courseID = 8;
-                break;
-        }
+        $courseID = $_GET['courseID'];
+        echo "Tee-times for ".$courseName;
+//        $courseID = 0;
+//        switch ($courseName) {
+//            case "royal":
+//                echo "Tee-times for ".$courseName;
+//                echo "<style> body {background-image:url('https://cdn.shopify.com/s/files/1/0191/3924/products/royal3.jpg?v=1565999211'); background-repeat: no-repeat; background-attachment: scroll; background-position: 50% 116%; background-size: 800px 450px;}</style>";
+//                $courseID = 1;
+//                break;
+//            case "koolau":
+//                echo "Tee-times for Ko'olau Golf Club";
+//                echo "<style> body {background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmoNGIPL3FogIO41FRiln3Dhy0LwMdevqSEGLC5O0-ssVKfyyOEA'); background-repeat: no-repeat; background-attachment: scroll; background-position: 50% 116%; background-size: 800px 450px;}</style>";
+//                $courseID = 2;
+//                break;
+//            case "bayview":
+//                echo "Tee-times for Bayview Golf Course";
+//                echo "<style> body {background-image:url('https://cdn.shopify.com/s/files/1/0191/3924/products/website-2_47e4f125-a4b9-4680-a043-3bc5b02ff6cf.jpg?v=1566009408'); background-repeat: no-repeat; background-attachment: scroll; background-position: 50% 116%; background-size: 800px 450px;}</style>";
+//                $courseID = 3;
+//                break;
+//            case "turtle":
+//                echo "Tee-times for Turtle Bay Golf Resort";
+//                echo "<style> body {background-image:url('https://www.turtlebayresort.com/sites/default/files/KamGolfPage_BookNow_4.jpg'); background-repeat: no-repeat; background-attachment: scroll; background-position: 50% 116%; background-size: 800px 450px;}</style>";
+//                $courseID = 4;
+//                break;
+//            case "leilehua":
+//                echo "Tee-times for Leilehua Golf Club";
+//                echo "<style> body {background-image:url('https://millerdesigngolf.com/images/galleries/past_projects/leilehua_golf_course/Green_after_shot_8_green.jpg'); background-repeat: no-repeat; background-attachment: scroll; background-position: 50% 116%; background-size: 800px 450px;}</style>";
+//                $courseID = 5;
+//                break;
+//            case "koolina":
+//                echo "Tee-times for Ko'olina Golf Club";
+//                echo "<style> body {background-image:url('https://cdn.shopify.com/s/files/1/0191/3924/products/newkoolina1_7e5b8ff8-893c-42f5-accb-33d6bfab44f8.jpg?v=1566006290'); background-repeat: no-repeat; background-attachment: fixed; background-position: 50% 116%; background-size: 800px 450px;}</style>";
+//                $courseID = 6;
+//                break;
+//            case "kapolei":
+//                echo "Tee-times for Kapolei Golf Course";
+//                echo "<style> body {background-image:url('https://cdn.shopify.com/s/files/1/0191/3924/products/newkap5.jpg?v=1566007373'); background-repeat: no-repeat; background-attachment: scroll; background-position: 50% 116%; background-size: 800px 450px;}</style>";
+//                $courseID = 7;
+//                break;
+//            case "alawai":
+//                echo "Tee-times for Ala Wai Golf Club";
+//                echo "<style> body {background-image:url('https://media-cdn.tripadvisor.com/media/photo-s/01/d6/7d/66/ala-wai-golf-course-from.jpg'); background-repeat: no-repeat; background-attachment: scroll; background-position: 50% 116%; background-size: 800px 450px;}</style>";
+//                $courseID = 8;
+//                break;
+//      }
         ?>&ensp;
     </span>
 
-    <br><br><br><br><br>
+    <br><br><br>
 
     <?php
     
@@ -216,13 +219,14 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         }
         ?>
     </table>
-    <br><br><br>
+    <br><br>
     <!--<button id="book" class="bookButton" type="button" onmouseover="changeBook('white', '40px', 'seagreen', 'bold')" onclick="clickedBookButton()" onmouseout="changeBook('black', '30px', 'white', 'normal')">Book!</button>-->
     <div class="bttn" onclick="if (selectedTime !== '') {
                 clickedBookButton();
             }">
                 <p>Book!</p>
     </div>
+    <br><br>
 </center>
 
 <!--<script src="/Users/akbazuka/Desktop/kedlena/teeItUp/jsFiles/teeTimesJS.js"></script>-->
@@ -238,6 +242,14 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         console.log(selectedTime);
         console.log(selectedTimeID);
     }
+    
+    //Event Listener to reset selectedTime to empty when user clicks anywhere outside a tee time button
+    document.addEventListener(`click`, function (event) {
+        //Runs only when class is NOT 'btnOn'
+        if (!event.target.closest('.btnOn')) {
+           refreshTime('','');
+        }
+    });
 
     function clickedBookButton()
     {
@@ -266,8 +278,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     //For jumping book button
     var $button = document.querySelector('.bttn');
     $button.addEventListener('click', function () {
-        var duration = 0.3,
-                delay = 0.08;
+        var duration = 0.3, delay = 0.08;
         TweenMax.to($button, duration, {scaleY: 1.6, ease: Expo.easeOut});
         TweenMax.to($button, duration, {scaleX: 1.2, scaleY: 1, ease: Back.easeOut, easeParams: [3], delay: delay});
         TweenMax.to($button, duration * 1.25, {scaleX: 1, scaleY: 1, ease: Back.easeOut, easeParams: [6], delay: delay * 3});

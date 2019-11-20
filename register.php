@@ -1,3 +1,4 @@
+<html style="background-image: url(images/bgImg.jpg); background-size: cover;">
 <?php
 // Include config file
 require_once "config.php";
@@ -91,8 +92,6 @@ include_once 'title.php';
 // Initialize the session
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
     <head>
         <meta charset="UTF-8">
         <title>Sign Up</title>
@@ -107,9 +106,9 @@ include_once 'title.php';
             .outer {
                 display: table;
                 position: absolute;
-                top: 25%;
+/*                top: 25%;*/
                 left: 0;
-                height: 80%;
+                height: 70%;
                 width: 100%;
             }
 
@@ -127,7 +126,7 @@ include_once 'title.php';
                 padding: 20px;
             </style>
         </head>
-        <body> 
+        <body style="background-color: transparent;"> 
             <div class="outer">
                 <div class="middle">
                     <div class="inner">
