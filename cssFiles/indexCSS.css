@@ -1,14 +1,9 @@
-html
-{
-    /*text-align:center;*/
-    background-color:black;
-}
 body{
     /*??Try
     max-width:1200px;
     margin:auto;*/
 }
-*@media (min-width: 1200px) {
+@media (min-width: 1200px) {
     .container1 {
         max-width: 1340px;
         background-color: transparent;

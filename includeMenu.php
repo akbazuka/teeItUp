@@ -9,7 +9,7 @@
         <div class="dropdown pull-right" style="cursor:pointer; position: absolute; right: 30;">
         <!--<li class=" style btn btn-home" style="position: absolute; right: 30; display:inline-block; vertical-align:middle;"><a href='#calendar'><img src="images/icon.png" style="bottom:50px;">                <b><?php echo "<em style='font-size:22px;'>" . htmlspecialchars($_SESSION["username"]) . "</em>"; ?></b><i class='fa fa-caret-down'></i></a>-->
             <button class="btn1-bookings dropdown-toggle" type="button" data-toggle="dropdown" data-hover="dropdown">
-                <img src="images/icon.png" style="bottom:50px;">&ensp;<b>
+                <img src="images/accountIcon.png" style="bottom:50px;">&ensp;<b>
                     <?php echo "<span style='font-size:22px;'>" . htmlspecialchars($_SESSION["username"]) . "</span>"; ?>
                 </b>&ensp;
                 <span class="caret"></span>

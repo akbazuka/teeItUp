@@ -20,7 +20,8 @@ a.header:visited
 {
     /*font-family:Georgia;*/
     color:black;
-    background-color:transparent !important;
+/*    background-color:transparent !important;*/
+    background-color: rgba(255,255,255,0.6);
     /*background-color:seagreen;*/
     /*top:0;//To make header stick to top*/
 /*    position: -webkit-sticky;  In case run on Safari 
@@ -29,7 +30,7 @@ a.header:visited
     /*border-radius: 10px;*/
     /*height:200px;*/
     /*padding:2% 0 0;*/
-    padding: 1% 0 1% 0;
+    padding: 1% 0 0 0;
 }
 
 .img1

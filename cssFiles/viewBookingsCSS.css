@@ -36,10 +36,73 @@ and open the template in the editor.
     margin-left: auto;
     margin-right: auto;
     width: 80%; /*Width of table horizontally on screen*/
-    border: 3px solid seagreen;
+    border: 3px solid cadetblue;
     border-radius: 20px;
     background-color: white;
     padding: 20px;
+}
+
+.btn1-delete {
+    display: inline-block;
+    text-decoration: none;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid white;
+    border-radius: 4px;
+    color: #fff;
+    background-color: tomato;
+    border-color: black;
+}
+
+.btn1-delete:focus,
+.btn1-delete.focus {
+    color: #fff;
+    background-color: red;
+    border-color: black;
+}
+
+.btn1-delete:hover {
+    color: #fff;
+    background-color: red;
+    border-color: black;
+    border-width: 2px;
+    text-decoration: none !important;
+}
+
+.btn1-delete:active,
+.btn1-delete.active,
+.open > .dropdown-toggle.btn1-warning {
+    color: #fff;
+    background-color: red;
+    border-color: black;
+}
+
+.btn1-delete:active:hover,
+.btn1-delete.active:hover,
+.open > .dropdown-toggle.btn1-delete:hover,
+.btn1-delete:active:focus,
+.btn1-delete.active:focus,
+.open > .dropdown-toggle.btn1-delete:focus,
+.btn1-delete:active.focus,
+.btn1-delete.active.focus,
+.open > .dropdown-toggle.btn1-delete.focus {
+    color: #fff;
+    background-color: tomato;
+    border-color: black;
 }
 
 table.dataTable thead .sorting:after,
@@ -53,5 +116,9 @@ table.dataTable thead .sorting_desc:before,
 table.dataTable thead .sorting_desc_disabled:after,
 table.dataTable thead .sorting_desc_disabled:before {
   bottom: .5em;
+}
+
+.swal2-container {
+  zoom: 1.5;
 }
 

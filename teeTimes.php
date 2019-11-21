@@ -262,7 +262,7 @@ include_once 'includeMenu.php';
             url: "pushBookingsAjax.php",
             data: {selectedTimeID: selectedTimeID},
             success: function (data) {
-                console.log(data);
+//                console.log(data);
             }
         });
     }

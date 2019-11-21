@@ -1,18 +1,18 @@
 <html style="background-image: url(images/bgImg.jpg); background-size: cover;">
-<?php
-include_once "title.php";
+    <?php
+    include_once "title.php";
 
 // Initialize the session
-session_start();
+    session_start();
 
 // Check if the user is logged in, if not then redirect him to login page
-if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-    header("location: login.php");
-    exit;
-}
+    if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+        header("location: login.php");
+        exit;
+    }
 
-include_once 'includeMenu.php';
-?>
+    include_once 'includeMenu.php';
+    ?>
     <link href='https://fonts.googleapis.com/css?family=Charm' rel='stylesheet'>
 
     <!Import Bootstrap>
@@ -25,11 +25,9 @@ include_once 'includeMenu.php';
 
     <link rel="stylesheet" type="text/css" href="cssFiles/addons/datatables-select.min.css"/>
 
-    <link rel="stylesheet" href="cssFiles/tableView.css">
-    
     <!-- Bootstrap Dropdown Hover CSS -->
     <link href="cssFiles/dropDownCSS/animate.min.css" rel="stylesheet">
-    
+
     <link href="cssFiles/dropDownCSS/bootstrap-dropdownhover.min.css" rel="stylesheet">
 
     <body style="background-color: transparent;">
@@ -61,12 +59,17 @@ include_once 'includeMenu.php';
 //    echo print_r($result2);
 //    echo "\n" . $result2[1]['teeTimeID'];
             //To store the booked date times
+            $bookingIDs = array();
             $teeTimes = array();
             $teeDates = array();
             //To store the booked golf course IDs   
             $golfCourseIDs = array();
 
             foreach ($result2 as $row) {
+                //Get booking IDs
+                $bookingID = $row['bookingID'];
+                array_push($bookingIDs, $bookingID);
+
                 //Get tee date and times for tee time IDs
                 $stmt3 = $conn->prepare("SELECT `teeDateTime` FROM `teeTime` WHERE `teeTimeID`='" . $row['teeTimeID'] . "'");
                 $stmt3->execute();
@@ -103,17 +106,19 @@ include_once 'includeMenu.php';
 
             //echo "\n These are the golf course names: " . print_r($golfCourseNames);
 
-            $stmt6 = $conn->prepare("SELECT `golfCourseName` FROM `golfCourse` WHERE `golfCourseID`='" . $row['golfCourseID'] . "'");
-
             /* Display information from database in table */
             echo "<div class='outer'><div class='middle'><div class='inner'><table id='dtBasicExample' class='table table-striped table-bordered table-sm' cellspacing='0' width='100%'>
   <thead>
     <tr>
+    <th class='th-sm'>Ref. No.
+      </th>
       <th class='th-sm'>Date
       </th>
       <th class='th-sm'>Time
       </th>
       <th class='th-sm'>Course
+      </th>
+      <th class='th-sm'>Manage
       </th>
     </tr>
   </thead>";
@@ -121,9 +126,11 @@ include_once 'includeMenu.php';
             for ($i = 0; $i < sizeof($teeDates); $i++) {
                 echo "
     <tr>
+      <td>" . $bookingIDs[$i] . "</td>
       <td>" . $teeDates[$i] . "</td>
       <td>" . $teeTimes[$i] . "</td>
       <td>" . $golfCourseNames[$i] . "</td>
+      <td><button class='btn1-delete' onclick= cancelBooking(" . $bookingIDs[$i] . ")>Delete</button></td>
     </tr>";
             }
 
@@ -138,20 +145,55 @@ include_once 'includeMenu.php';
         <script src="jsFiles/addons/datatables-select.min.js"></script>
         <!-- Latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-        
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
         <!-- Bootstrap Dropdown Hover JS -->
         <script src="jsFiles/dropDownJS/bootstrap-dropdownhover.min.js"></script>
 
 <!--<script src="jsFiles/vendor/modernizr-3.7.1.min.js"></script>-->
 
         <script>
-            // Basic example
+            // Search in dataTable
             $(document).ready(function () {
                 $('#dtBasicExample').DataTable({
                     "searching": true // false to disable search (or any other option)
                 });
                 $('.dataTables_length').addClass('bs-select');
             });
+
+            function cancelBooking(x)
+            {
+                Swal.fire({
+                    title: 'Are you sure?',
+                    width: '64rem',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.value) {
+                        //Ajax method to insert into booked table in database and update tee times table
+                        $.ajax({
+                            type: "POST",
+                            url: "deleteBookingsAjax.php",
+                            data: {bookingID: (x)},
+                            success: function (data) {
+//                                console.log(data);
+                            }
+                        });
+                        Swal.fire(
+                                'Deleted!',
+                                'Your booking has been deleted.',
+                                'success'
+                                );
+                        $(Swal.getConfirmButton()).click(function () {
+                            document.location.reload(true); //Reload document when ok button is clicked
+                        });
+                    }
+                });
+            }
         </script>
     </body>
 </html>

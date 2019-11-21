@@ -1,6 +1,4 @@
 <?php
-include_once "title.php";
-
 // Initialize the session
 session_start();
 
