@@ -89,7 +89,7 @@ try {
 //        echo 'Message has been sent.';
 //    }
         
-} catch (PDOException $e) {
+} catch (Exception $e) {
     echo "Error: " . $e->getMessage();
 }
 ?>
