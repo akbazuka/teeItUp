@@ -10,6 +10,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     exit;
 }
 
+require_once "config.php";
 require_once 'phpmailer/class.phpmailer.php';
 include 'phpmailer/class.smtp.php';
 
@@ -20,9 +21,9 @@ try {
     $databasename = "teeItUp";
 
     /* Attempt to connect to MySQL database */
-    $conn = new PDO("mysql:host=$servername;dbname=$databasename", $username, $password);
+    //$conn = new PDO("mysql:host=$servername;dbname=$databasename", $username, $password);
 
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    //$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     /* //For checking if there are missing times
       $stmt = $conn->prepare("SELECT (`teeDateTime`) FROM `teeTime` WHERE `golfCourseID`='" . $courseID . "'");
@@ -40,18 +41,34 @@ try {
 //    $date = $_POST['selectedDate'];
 //    
     //$_SESSION["id"] is the user id; being taken directly from the session rather than push via jQuery
-    $stmt1 = $conn->prepare("INSERT INTO bookings (userID, teeTimeID) VALUES (" . $_SESSION['id'] . "," . $timeID . ")");
-    $stmt1->execute();
+    //$stmt1 = $conn->prepare("INSERT INTO bookings (userID, teeTimeID) VALUES (" . $_SESSION['id'] . "," . $timeID . ")");
+    //$stmt1->execute();
+	$sql = "INSERT INTO bookings (userID, teeTimeID) VALUES (" . $_SESSION['id'] . "," . $timeID . ")";
+	$link->query($sql);
 
     //For updating teeTimes table to show that teeTime that was booked is no longer available
     $sql = "UPDATE `teeTime` SET `booked` = 1 WHERE `teeTime`.`teeTimeID` =  $timeID";
-    $results = $conn->exec($sql);
+    //$results = $conn->exec($sql);
+	$link->query($sql);
     
-    $sql1 = $conn->prepare("SELECT `email` FROM `users` WHERE `id`=" . $_SESSION['id']);
-    $sql1->execute();
-    $results1 = $sql1->fetchAll(PDO::FETCH_ASSOC);
+    //$sql1 = $conn->prepare("SELECT `email` FROM `users` WHERE `id`=" . $_SESSION['id']);
+    //$sql1->execute();
+    //$results1 = $sql1->fetchAll(PDO::FETCH_ASSOC);
+	$sql = "SELECT `email` FROM `users` WHERE `id`=" . $_SESSION['id'];
+	$result = $link->query($sql);
+	
+	if ($result->num_rows > 0) {
+        
+        while($row = $result->fetch_assoc()) {
+            $email = $row["email"];
+        }
+    } else {
+        echo "0 results";
+    }
+	
+	
     
-    $email = $results1[0]['email'];
+    //$email = $results1[0]['email'];
     
 //    // set the resulting array to associative  
 //    $result1 = $stmt1->fetchAll(PDO::FETCH_ASSOC);
