@@ -81,41 +81,41 @@ try {
         $body = file_get_contents('phpmailer/TeeItUpMail.php');
         $body1 = '<h1>Hello</h1>';
     
-        $mail = new PHPMailer(true);
-        $mail->isSMTP();                                            
-        $mail->Host       = 'smtp.office365.com';                   
-        $mail->Port       = 25;                                    
-        $mail->SMTPSecure = 'tls';
-        $mail->SMTPAuth = true;                                   
-        $mail->Username   = 'team@kedlena.com';    
-        $mail->Password   = 'Pandino0!';    
-        $mail->setFrom('team@kedlena.com');
-        
-        $mail->CharSet = 'UTF-8';
-        $mail->isHTML(true);
-        $mail->addAddress('akedlaya@my.hpu.edu');   
-    
-        $mail->addAddress($email);
-        $mail->Subject = 'Tee It Up- Booking Confirmation';
-        $mail->msgHTML($body1);
-        $mail->send();
-
 //        $mail = new PHPMailer(true);
-//        $mail->isSMTP();   
-//        $mail->SMTPDebug = 2;
-//        $mail->Host       = 'smtp.gmail.com';                   
-//        $mail->Port       = 465;                                    
-//        $mail->SMTPSecure = 'ssl';
+//        $mail->isSMTP();                                            
+//        $mail->Host       = 'smtp.office365.com';                   
+//        $mail->Port       = 25;                                    
+//        $mail->SMTPSecure = 'tls';
 //        $mail->SMTPAuth = true;                                   
-//        $mail->Username   = 'skyflexr@gmail.com';                    
-//        $mail->Password   = 'Kakasigusi&!|';                              
-//        $mail->setFrom('skyflexr@gmail.com', 'Team Kedlena');
+//        $mail->Username   = 'team@kedlena.com';    
+//        $mail->Password   = 'Pandino0!';    
+//        $mail->setFrom('team@kedlena.com');
+//        
 //        $mail->CharSet = 'UTF-8';
 //        $mail->isHTML(true);
-//        $mail->addAddress('akedlaya@my.hpu.edu');
+//        $mail->addAddress('akedlaya@my.hpu.edu');   
+//    
+//        $mail->addAddress($email);
 //        $mail->Subject = 'Tee It Up- Booking Confirmation';
 //        $mail->msgHTML($body1);
-//        $mail->send();       
+//        $mail->send();
+
+        $mail = new PHPMailer(true);
+        $mail->isSMTP();                                            
+        $mail->Host       = 'smtp.gmail.com';                   
+        $mail->Port       = 465;                                    
+        $mail->SMTPSecure = 'ssl';
+        $mail->SMTPAuth = true;                                   
+        $mail->Username   = 'hpu.taskmanager@gmail.com';                    
+        $mail->Password   = 'HPU12345';                              
+        $mail->setFrom('hpu.taskmanager@gmail.com', 'HPU Task-Manager (Team 6)');
+        $mail->CharSet = 'UTF-8';
+        $mail->isHTML(true);
+    
+        $mail->addAddress('akedlaya@my.hpu.edu');
+        $mail->Subject = "Confirmation: You booked a tee time!";
+        $mail->msgHTML($body1);
+        $mail->send();     
         
 //        
 //    if (!$mail->send()) {
