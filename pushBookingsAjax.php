@@ -39,14 +39,14 @@ try {
 //    $date = $_POST['selectedDate'];
 //    
     //$_SESSION["id"] is the user id; being taken directly from the session rather than push via jQuery
-    $stmt1 = $conn->prepare("INSERT INTO `bookings` (`bookingID`, `userID`, `teeTimeID`) VALUES (NULL, '" . $_SESSION["id"] . "',$time)");
+    $stmt1 = $conn->prepare("INSERT INTO `bookings` (`bookingID`, `userID`, `teeTimeID`) VALUES (NULL," . $_SESSION['id'] . ",$time)");
     $stmt1->execute();
 
     //For updating teeTimes table to show that teeTime that was booked is no longer available
     $sql = "UPDATE `teeTime` SET `booked` = '1' WHERE `teeTime`.`teeTimeID` =  $time";
     $results = $conn->exec($sql);
     
-    $sql1 = $conn->prepare("SELECT `email` FROM `users` WHERE `id`='" . $_SESSION["id"] . "'");
+    $sql1 = $conn->prepare("SELECT `email` FROM `users` WHERE `id`=" . $_SESSION['id']);
     $sql1->execute();
     $results1 = $sql1->fetchAll(PDO::FETCH_ASSOC);
     
