@@ -39,7 +39,7 @@ try {
 //    $date = $_POST['selectedDate'];
 //    
     //$_SESSION["id"] is the user id; being taken directly from the session rather than push via jQuery
-    $stmt1 = $conn->prepare("INSERT INTO `bookings` (`bookingID`, `userID`, `teeTimeID`) VALUES (NULL, '" . $_SESSION["id"] . "',' $time ')");
+    $stmt1 = $conn->prepare("INSERT INTO `bookings` (`bookingID`, `userID`, `teeTimeID`) VALUES (NULL, '" . $_SESSION["id"] . "',$time)");
     $stmt1->execute();
 
     //For updating teeTimes table to show that teeTime that was booked is no longer available
