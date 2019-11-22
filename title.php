@@ -4,6 +4,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel='shortcut icon' href='images/favicon.ico' type='image/x-icon'/> <!Adds favicon>
         <link href='https://fonts.googleapis.com/css?family=Paprika' rel='stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=Adamina' rel='stylesheet'>
         <link rel="stylesheet" type="text/css" href="cssFiles/titleCSS.css">
     </head>
 

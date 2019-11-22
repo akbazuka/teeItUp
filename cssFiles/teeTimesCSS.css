@@ -1,3 +1,34 @@
+.box 
+{
+    border-spacing: 20px;
+    font-size: 18px;
+    /*margin-right: 2%;*/
+    height: 30%;
+    border: 3px solid black;
+    width: 17%;
+    padding: 1% 0 0 0;
+    border-radius: 15px;
+    background-color: white;
+    position:relative;
+    /*??Try
+    display: flex;
+    flex-wrap: wrap;
+    */
+}
+
+.boxLeft
+{
+   float:left; 
+   margin-left: 3%;
+}
+
+.boxRight
+{
+   float:right; 
+   margin-right: 3%;
+}
+
+
 #subtitle
 {
     color:black;
@@ -130,4 +161,8 @@ Shadow of jumping button
     opacity: 0.4;
     bottom: -30px;
 }*/
+
+.swal2-container {
+  zoom: 1.5;
+}
 

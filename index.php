@@ -32,14 +32,14 @@ include_once 'includeMenu.php';
 
     <!--Bootstrap JS-->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-
+    
     <!-- Bootstrap Dropdown Hover JS -->
     <script src="jsFiles/dropDownJS/bootstrap-dropdownhover.min.js"></script>
 
     <br><br>
 <center>
 
-    <?php
+  <?php
     try {
         $servername = "localhost";
         $username = "kedlaya";
@@ -57,7 +57,9 @@ include_once 'includeMenu.php';
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $j = 1;
+        
         echo "<div class='container1'>";
+        
         foreach ($result as $row) {
 
             echo "<div class='box' id='box" . $j . "'>
@@ -65,8 +67,8 @@ include_once 'includeMenu.php';
             <img src='" . $row['courseImageLink'] . "' style='width: 100%; height: auto;'>
             <div class='desc'>" . $row['golfCourseName'] . "</div>
         </a>
-        <div id='pop" . $j . "' class='popup topright' onclick='popUp(\"" . $row['htmlIDName'] . "\")'>i
-            <span class='popuptext' id='" . $row['htmlIDName'] . "'>Hours: " . $row['courseHours'] . "<br>Phone: " . $row['coursePhone'] . "</span>
+        <div id='pop" . $j . "' class='popup topright' onclick='popUp(\"" . $row['golfCourseID'] . "\")'>i
+            <span class='popuptext' id='" . $row['golfCourseID'] . "'>Hours: " . $row['courseHours'] . "<br>Phone: " . $row['coursePhone'] . "</span>
         </div>
     </div>";
             $j++;
@@ -76,86 +78,7 @@ include_once 'includeMenu.php';
         echo "Error: " . $e->getMessage();
     }
     ?>
-    <!--    
-        <div class="box" id="box1">
-            <a class="courses" target="_self" href="teeTimes.php?courseName=royal" onmouseover="boxHover('box1', 'crimson')" onmouseout="boxHover('box1', 'green')">
-                <img src="https://cdn.shopify.com/s/files/1/0191/3924/products/royal3.jpg?v=1565999211" alt="Royal Hawaiian Golf Club">
-                <div class="desc">Royal Hawaiian Golf Club</div>
-            </a>
-            <div class="popup topright" onclick="popUp('infoRoyal')">i
-                <span class="popuptext" id="infoRoyal">Hours: Mon-Sun; 6am-6pm<br>Phone: (808) 262-2139</span>
-            </div>
-        </div>-->
-    <!--
-        <div class="box" id="box2">
-            <a class="courses" target="_self" href="teeTimes.php?courseName=koolau" onmouseover="boxHover('box2', 'crimson')" onmouseout="boxHover('box2', 'green')">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmoNGIPL3FogIO41FRiln3Dhy0LwMdevqSEGLC5O0-ssVKfyyOEA" alt="Ko'olau Golf Club">
-                <div class="desc">Ko'olau Golf Club</div>
-            </a>
-            <div class="popup topright" onclick="popUp('infoKoolao')">i
-                <span class="popuptext" id="infoKoolao">Hours: Mon-Sun; 6:30am-6pm<br>Phone: (808) 236-4653</span>
-            </div>
-        </div>
-    
-        <div class="box" id="box3">
-            <a class="courses" target="_self" href="teeTimes.php?courseName=bayview" onmouseover="boxHover('box3', 'crimson')" onmouseout="boxHover('box3', 'green')">
-                <img src="https://cdn.shopify.com/s/files/1/0191/3924/products/website-2_47e4f125-a4b9-4680-a043-3bc5b02ff6cf.jpg?v=1566009408" alt="Bayview Golf Course">
-                <div class="desc">Bayview Golf Course</div>
-            </a>
-            <div class="popup topright" onclick="popUp('infoBayview')">i
-                <span class="popuptext" id="infoBayview">Hours: Mon-Sun; 6:30am-9pm<br>Phone: (808) 247-0451</span>
-            </div>
-        </div>
-    
-        <div class="box" id="box4">
-            <a class="courses" target="_self" href="teeTimes.php?courseName=turtle" onmouseover="boxHover('box4', 'crimson')" onmouseout="boxHover('box4', 'green')">
-                <img src="https://www.turtlebayresort.com/sites/default/files/KamGolfPage_BookNow_4.jpg" alt="Turtle Bay Golf Resort">
-                <div class="desc">Turtle Bay Golf Resort</div>
-            </a>
-            <div class="popup topright" onclick="popUp('infoTurtle')">i
-                <span class="popuptext" id="infoTurtle">Hours: Mon-Sun; 6:30am-6pm<br>Phone: (808) 247-0451</span>
-            </div>
-        </div>
-    
-        <div class="box" id="box5">
-            <a class="courses" target="_self" href="teeTimes.php?courseName=leilehua" onmouseover="boxHover('box5', 'crimson')" onmouseout="boxHover('box5', 'green')">
-                <img src="https://millerdesigngolf.com/images/galleries/past_projects/leilehua_golf_course/Green_after_shot_8_green.jpg" alt="Leilehua Golf Club">
-                <div class="desc">Leilehua Golf Club</div>
-            </a>
-            <div class="popup topright" onclick="popUp('infoLeilehua')">i
-                <span class="popuptext" id="infoLeilehua">Hours: Mon-Sun; 6:30am-7:30pm<br>Phone: (808) 655-4653</span>
-            </div>
-        </div>
-    
-        <div class="box" id="box6">
-            <a class="courses" target="_self" href="teeTimes.php?courseName=koolina" onmouseover="boxHover('box6', 'crimson')" onmouseout="boxHover('box6', 'green')">
-                <img src="https://cdn.shopify.com/s/files/1/0191/3924/products/newkoolina1_7e5b8ff8-893c-42f5-accb-33d6bfab44f8.jpg?v=1566006290" alt="Ko'olina Golf Club">
-                <div class="desc">Ko'olina Golf Club</div>
-            </a>
-            <div class="popup topright" onclick="popUp('infoKoolina')">i
-                <span class="popuptext" id="infoKoolina">Hours: Mon-Sun; 6:30am-7pm<br>Phone: (808) 676-5300</span>
-            </div>
-        </div>
-    
-        <div class="box" id="box7">
-            <a class="courses" target="_self" href="teeTimes.php?courseName=kapolei" onmouseover="boxHover('box7', 'crimson')" onmouseout="boxHover('box7', 'green')">
-                <img src="https://cdn.shopify.com/s/files/1/0191/3924/products/newkap5.jpg?v=1566007373" alt="Kapolei Golf Course">
-                <div class="desc">Kapolei Golf Course</div>
-            </a>
-            <div class="popup topright" onclick="popUp('infoKapolei')">i
-                <span class="popuptext" id="infoKapolei">Hours: Mon-Sun; 6am-6pm<br>Phone: (808) 674-2227</span>
-            </div>
-        </div>
-    
-        <div class="box" id="box8">
-            <a class="courses" target="_self" href="teeTimes.php?courseName=alawai" onmouseover="boxHover('box8', 'crimson')" onmouseout="boxHover('box8', 'green')">
-                <img src="https://media-cdn.tripadvisor.com/media/photo-s/01/d6/7d/66/ala-wai-golf-course-from.jpg" alt="Ala Wai Golf Club">
-                <div class="desc">Ala Wai Golf Club</div>
-            </a>
-            <div class="popup topright" onclick="popUp('infoAlawai')">i
-                <span class="popuptext" id="infoAlawai">Hours: Mon-Sun; 6am-5:30pm<br>Phone: (808) 733-7387</span>
-            </div>
-        </div>-->
+   
 </center>
 <!--<script src="/Users/akbazuka/Desktop/kedlena/teeItUp/jsFiles/indexJS.js"></script>-->
 <script>
@@ -183,7 +106,7 @@ include_once 'includeMenu.php';
     function popUp(x) {
         //alert("sent");
         var popup = document.getElementById(x);
-        console.log(popup);
+//        console.log(popup);
         var showItems = document.getElementsByClassName("popuptext");
         for (i = 0; i < showItems.length; i++)
         {
