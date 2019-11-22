@@ -1,4 +1,5 @@
 <?php
+//require_once 'config.php';
 
 // Initialize the session
 session_start();
@@ -65,7 +66,7 @@ try {
     
         $mail = new PHPMailer(true);
         $mail->isSMTP();                                            
-        $mail->Host       = 'smtp.gmail.com';                   
+        $mail->Host       = 'smtp.office365.com';                   
         $mail->Port       = 465;                                    
         $mail->SMTPSecure = 'ssl';
         $mail->SMTPAuth = true;                                   
@@ -81,13 +82,14 @@ try {
         $mail->Subject = 'Tee It Up- Booking Confirmation';
         $mail->msgHTML($body1);
         $mail->send();
-//        
-//    if (!$mail->send()) {
-//        echo '<h1 style="font-weight: bold; color: black;>Message was not sent.</h1>';
-//        echo '<h1 style="font-weight: bold; color: black;">Mailer error: ' . $mail->ErrorInfo.'</h1>';
-//    } else {
-//        echo 'Message has been sent.';
-//    }
+        
+        
+    if (!$mail->send()) {
+        echo '<h1 style="font-weight: bold; color: black;>Message was not sent.</h1>';
+        echo '<h1 style="font-weight: bold; color: black;">Mailer error: ' . $mail->ErrorInfo.'</h1>';
+    } else {
+        echo 'Message has been sent.';
+    }
         
 } catch (Exception $e) {
     echo "Error: " . $e->getMessage();
