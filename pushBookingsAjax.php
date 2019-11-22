@@ -31,7 +31,7 @@ try {
     //$userID = $POST_['userID'];
     //echo "This is the user ID: ".$userID;
 
-    $time = $_POST['selectedTimeID'];
+    $timeID = $_POST['selectedTimeID'];
     //echo "\nThis is the selected time: ".$time;
     //$stmt1 = $conn->prepare("INSERT INTO `bookings` (`bookingID`, `userID`, `teeTimeID`) VALUES (NULL, '1','".$time."')");
 
@@ -39,11 +39,11 @@ try {
 //    $date = $_POST['selectedDate'];
 //    
     //$_SESSION["id"] is the user id; being taken directly from the session rather than push via jQuery
-    $stmt1 = $conn->prepare("INSERT INTO bookings (userID, teeTimeID) VALUES (" . $_SESSION['id'] . "," . $time . ")");
+    $stmt1 = $conn->prepare("INSERT INTO bookings (userID, teeTimeID) VALUES (" . $_SESSION['id'] . "," . $timeID . ")");
     $stmt1->execute();
 
     //For updating teeTimes table to show that teeTime that was booked is no longer available
-    $sql = "UPDATE `teeTime` SET `booked` = '1' WHERE `teeTime`.`teeTimeID` =  $time";
+    $sql = "UPDATE `teeTime` SET `booked` = 1 WHERE `teeTime`.`teeTimeID` =  $timeID";
     $results = $conn->exec($sql);
     
     $sql1 = $conn->prepare("SELECT `email` FROM `users` WHERE `id`=" . $_SESSION['id']);
