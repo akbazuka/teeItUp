@@ -165,19 +165,19 @@
                 if ($bookedTimes[$x] == 1 && $x == 0) {
                     echo "<tr><td><button class='btn_off'>$times[$x]</div></td>";
                 } else if ($bookedTimes[$x] != 1 && $x == 0) {
-                    echo"<tr><td><button class='btnOn' style='cursor:pointer;' onclick=refreshTime('" . $times[$x] . "','" . $timesID[$x] . "','" . $courseID . "')>$times[$x]</button></td>";
+                    echo"<tr><td><button class='btnOn' style='cursor:pointer;' onclick=refreshTime('" . $times[$x] . "','" . $timesID[$x] . "')>$times[$x]</button></td>";
                 } else if ($bookedTimes[$x] != 1 && ($x + 1) % 4 == 0 && ( $x != count($times) - 1) && $x != 0) {
-                    echo "<td><button class='btnOn' style='cursor:pointer;' onclick=refreshTime('" . $times[$x] . "','" . $timesID[$x] . "','" . $courseID . "')>$times[$x]</button></td></tr><tr>";
+                    echo "<td><button class='btnOn' style='cursor:pointer;' onclick=refreshTime('" . $times[$x] . "','" . $timesID[$x] . "')>$times[$x]</button></td></tr><tr>";
                 } else if ($bookedTimes[$x] == 1 && ($x + 1) % 4 == 0 && ( $x != count($times) - 1) && $x != 0) {
                     echo "<td><button class='btn_off'>$times[$x]</button></td></tr><tr>";
                 } else if ($bookedTimes[$x] == 1 && $x == (count($times) - 1)) {
                     echo "<td><button class='btn_off'>$times[$x]</button></td></tr>";
                 } else if ($bookedTimes[$x] != 1 && $x == (count($times) - 1)) {
-                    echo "<td><button class='btnOn' onclick=refreshTime('" . $times[$x] . "','" . $timesID[$x] . "','" . $courseID . "')>$times[$x]</button></td></tr>";
+                    echo "<td><button class='btnOn' onclick=refreshTime('" . $times[$x] . "','" . $timesID[$x] . "')>$times[$x]</button></td></tr>";
                 } else if ($bookedTimes[$x] == 1 && $x != 0) {
                     echo "<td><button class='btn_off'>$times[$x]</button></td>";
                 } else
-                    echo "<td><button class='btnOn' style='cursor:pointer;' onclick=refreshTime('" . $times[$x] . "','" . $timesID[$x] . "','" . $courseID . "')>$times[$x]</button></td>";
+                    echo "<td><button class='btnOn' style='cursor:pointer;' onclick=refreshTime('" . $times[$x] . "','" . $timesID[$x] . "')>$times[$x]</button></td>";
             }
             ?>
         </table>
@@ -197,13 +197,13 @@
         var selectedTime = "";
         var selectedDate = ""; //Have to implement in confiramtion message.
         var selectedTimeID = "";
-        var selectedGolfCourse = "";
+//        var selectedGolfCourse = "";
 
-        function refreshTime(x, y, z)
+        function refreshTime(x, y/*, z*/)
         {
             selectedTime = x;
             selectedTimeID = y;
-            selectedGolfCourse = z;
+//            selectedGolfCourse = z;
 //            console.log(selectedTime);
 //            console.log(selectedTimeID);
         }
@@ -222,7 +222,7 @@
             $.ajax({
                 type: "POST",
                 url: "pushBookingsAjax.php",
-                data: {selectedTimeID: selectedTimeID/*, courseName: selectedGolfCourse*/},
+                data: {selectedTimeID: selectedTimeID},
                 success: function (data) {
                     //                console.log(data);
                 }
