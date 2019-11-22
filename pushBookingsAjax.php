@@ -1,8 +1,5 @@
 <?php
 
-include_once 'phpmailer/class.phpmailer.php';
-include_once 'phpmailer/class.smtp.php';
-
 // Initialize the session
 session_start();
 
@@ -11,6 +8,9 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     header("location: login.php");
     exit;
 }
+
+require_once 'phpmailer/class.phpmailer.php';
+include 'phpmailer/class.smtp.php';
 
 try {
     $servername = "localhost";
@@ -34,15 +34,24 @@ try {
     $time = $_POST['selectedTimeID'];
     //echo "\nThis is the selected time: ".$time;
     //$stmt1 = $conn->prepare("INSERT INTO `bookings` (`bookingID`, `userID`, `teeTimeID`) VALUES (NULL, '1','".$time."')");
-    $golfCourseName = $POST['courseName'];
+
+//    $golfCourseName = $POST['courseName'];  
 //    $date = $_POST['selectedDate'];
+//    
     //$_SESSION["id"] is the user id; being taken directly from the session rather than push via jQuery
     $stmt1 = $conn->prepare("INSERT INTO `bookings` (`bookingID`, `userID`, `teeTimeID`) VALUES (NULL, '" . $_SESSION["id"] . "','" . $time . "')");
     $stmt1->execute();
 
     //For updating teeTimes table to show that teeTime that was booked is no longer available
-    $sql = "UPDATE `teeTime` SET `booked` = '1' WHERE `teeTime`.`teeTimeID` = '" . $time . "';";
+    $sql = "UPDATE `teeTime` SET `booked` = '1' WHERE `teeTime`.`teeTimeID` = '" . $time . "'";
     $results = $conn->exec($sql);
+    
+    $sql1 = $conn->prepare("SELECT `email` FROM `users` WHERE `id`='" . $_SESSION["id"] . "'");
+    $sql1->execute();
+    $results1 = $sql1->fetchAll(PDO::FETCH_ASSOC);
+    
+    $email = $results1[0]['email'];
+    
 //    // set the resulting array to associative  
 //    $result1 = $stmt1->fetchAll(PDO::FETCH_ASSOC);
 //
@@ -51,18 +60,35 @@ try {
 //    echo $json;
 //    
     //PHP Mailer; send confirmation email to use when booking is made
-    $mail = new PHPMailer;
-    $mail->setFrom('team@kedlena.com', 'AK');
-    $mail->addAddress($_SESSION["username"], $_SESSION["username"]);
-    $mail->Subject = 'Tee It Up- Booking Confirmation';
-    //$mail->isHTML(true);
-    $mail->Body = 'Hi! This is my first e-mail sent through PHPMailer.';
-    if (!$mail->send()) {
-        echo 'Message was not sent.';
-        echo 'Mailer error: ' . $mail->ErrorInfo;
-    } else {
-        echo 'Message has been sent.';
-    }
+        $body = file_get_contents('phpmailer/TeeItUpMail.php');
+        $body1 = '<h1>Hello</h1>';
+    
+        $mail = new PHPMailer(true);
+        $mail->isSMTP();                                            
+        $mail->Host       = 'smtp.gmail.com';                   
+        $mail->Port       = 465;                                    
+        $mail->SMTPSecure = 'ssl';
+        $mail->SMTPAuth = true;                                   
+        $mail->Username   = 'team@kedlena.com';    
+        $mail->Password   = 'Pandino0!';    
+        $mail->setFrom('team@kedlena.com', 'Tee It Up! Team');
+        $mail->CharSet = 'UTF-8';
+        $mail->isHTML(true);
+    
+        //$mail->addAddress($email);
+        $mail->addAddress('akedlaya@my.hpu.edu');       
+        
+        $mail->Subject = 'Tee It Up- Booking Confirmation';
+        $mail->msgHTML($body1);
+        $mail->send();
+//        
+//    if (!$mail->send()) {
+//        echo '<h1 style="font-weight: bold; color: black;>Message was not sent.</h1>';
+//        echo '<h1 style="font-weight: bold; color: black;">Mailer error: ' . $mail->ErrorInfo.'</h1>';
+//    } else {
+//        echo 'Message has been sent.';
+//    }
+        
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
 }

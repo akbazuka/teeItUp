@@ -222,7 +222,7 @@
             $.ajax({
                 type: "POST",
                 url: "pushBookingsAjax.php",
-                data: {selectedTimeID: selectedTimeID, courseName: selectedGolfCourse},
+                data: {selectedTimeID: selectedTimeID/*, courseName: selectedGolfCourse*/},
                 success: function (data) {
                     //                console.log(data);
                 }
