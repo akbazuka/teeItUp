@@ -101,7 +101,8 @@ try {
 //        $mail->send();
 
         $mail = new PHPMailer(true);
-        $mail->isSMTP();                                            
+        $mail->isSMTP();   
+        $mail->SMTPDebug = 2;
         $mail->Host       = 'smtp.gmail.com';                   
         $mail->Port       = 465;                                    
         $mail->SMTPSecure = 'ssl';
