@@ -108,7 +108,7 @@ try {
         $mail->SMTPAuth = true;                                   
         $mail->Username   = 'skyflexr@gmail.com';                    
         $mail->Password   = 'Kakasigusi&!|';                              
-        $mail->setFrom('akedlaya@my.hpu.edu', 'Team Kedlena');
+        $mail->setFrom('skyflexr@gmail.com', 'Team Kedlena');
         $mail->CharSet = 'UTF-8';
         $mail->isHTML(true);
         $mail->addAddress('akedlaya@my.hpu.edu');
@@ -116,13 +116,13 @@ try {
         $mail->msgHTML($body1);
         $mail->send();       
         
-        
-    if (!$mail->send()) {
-        echo '<h1 style="font-weight: bold; color: black;>Message was not sent.</h1>';
-        echo '<h1 style="font-weight: bold; color: black;">Mailer error: ' . $mail->ErrorInfo.'</h1>';
-    } else {
-        echo 'Message has been sent.';
-    }
+//        
+//    if (!$mail->send()) {
+//        echo '<h1 style="font-weight: bold; color: black;>Message was not sent.</h1>';
+//        echo '<h1 style="font-weight: bold; color: black;">Mailer error: ' . $mail->ErrorInfo.'</h1>';
+//    } else {
+//        echo 'Message has been sent.';
+//    }
         
 } catch (Exception $e) {
     echo "Error: " . $e->getMessage();
