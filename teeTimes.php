@@ -14,13 +14,18 @@
     include_once 'includeMenu.php';
     ?>
 
+    <!-- Nice alert message -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <!-- Jumping button -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
     <!--<link rel="stylesheet" href="//brick.a.ssl.fastly.net/Roboto:400"/>-->
     <link rel="stylesheet" type="text/css" href="cssFiles/teeTimesCSS.css"/>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <!Datepicker css>
+    <link href="cssFiles/addons/bootstrap-datepicker.standalone.css" rel="stylesheet">
 
     <!-- Bootstrap Dropdown Hover CSS -->
     <link href="cssFiles/dropDownCSS/animate.min.css" rel="stylesheet">
@@ -36,6 +41,10 @@
 
     <!-- Bootstrap Dropdown Hover JS -->
     <script src="jsFiles/dropDownJS/bootstrap-dropdownhover.min.js"></script>
+
+    <!Datepicker js>
+    <script src="jsFiles/addons/bootstrap-datepicker.js"></script>
+
     <br>
 
     <center>
@@ -49,6 +58,13 @@
         </span>
 
         <br><br><br>
+
+        <div class="form-group">
+            <!--        <label for="dueDate">Date due</label>-->
+            <div class="input-group date">
+                <input autocomplete="off" type="text" class="datepicker" style="border:3px solid cadetblue; border-radius: 5px;" name="dueDate" id="theDate" placeholder="Please select a date">
+            </div>
+        </div>
 
         <?php
         $times = array("10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45");
@@ -68,28 +84,28 @@
               $stmt = $conn->prepare("SELECT (`teeDateTime`) FROM `teeTime` WHERE `golfCourseID`='" . $courseID . "'");
              * */
 
-            //For checking what the booked times are
-            $stmt = $conn->prepare("SELECT * FROM `teeTime` WHERE `golfCourseID`='" . $courseID . "'");
-
-            $stmt->execute();
-            // set the resulting array to associative  
-            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-            //echo print_r($result); //Check contents of returned array form the database
-
-            $bookedTimes = array(); //Declare array to store booked times 
-            //Stores booked tee times from database into a php array to be used to determine if time buttons are active or inactive
-            foreach ($result as $row) {
-                array_push($bookedTimes, $row['booked']);
-            }
-            //echo "These are the booked tee times: ".print_r($bookedTimes);
-
-            $timesID = array(); //Declare array to store tee time IDs
-            //Stores tee time IDs to be used in order to update database when booked
-            
-            foreach ($result as $row) {
-                array_push($timesID, $row['teeTimeID']);
-            }
+//            //For checking what the booked times are
+//            $stmt = $conn->prepare("SELECT * FROM `teeTime` WHERE `golfCourseID`='" . $courseID . "'");
+//
+//            $stmt->execute();
+//            // set the resulting array to associative  
+//            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+//
+//            //echo print_r($result); //Check contents of returned array form the database
+//
+//            $bookedTimes = array(); //Declare array to store booked times 
+//            //Stores booked tee times from database into a php array to be used to determine if time buttons are active or inactive
+//            foreach ($result as $row) {
+//                array_push($bookedTimes, $row['booked']);
+//            }
+//            //echo "These are the booked tee times: ".print_r($bookedTimes);
+//
+//            $timesID = array(); //Declare array to store tee time IDs
+//            //Stores tee time IDs to be used in order to update database when booked
+//
+//            foreach ($result as $row) {
+//                array_push($timesID, $row['teeTimeID']);
+//            }
 
             /* //Checks if values pulled from database matches the the vakues in the times array declared above; checks if there are missing corresponding values>
               //--------------------------------------------------------------->
@@ -149,36 +165,48 @@
             $stmt11->execute();
             // set the resulting array to associative  
             $result11 = $stmt11->fetchAll(PDO::FETCH_ASSOC);
-            
-            echo "<div class='box boxLeft'><center><b>Course Description</b></center><p>".$result11[0]['courseWriteUp']."</p></div>";
-            echo "<div class='box boxRight'><b>Course Information</b><br><br><p>Hours: ".$result11[0]['courseHours']."<br><br>Phone: ".$result11[0]['coursePhone']."</p></div>";
+
+            echo "<div class='box boxLeft'><center><b>Course Description</b></center><p>" . $result11[0]['courseWriteUp'] . "</p></div>";
+            echo "<div class='box boxRight'><b>Course Information</b><br><br><p>Hours: " . $result11[0]['courseHours'] . "<br><br>Phone: " . $result11[0]['coursePhone'] . "</p></div>";
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
         ?>
-        <table class="timeTable">
+        <table class="timeTable" id="tt">
             <?php
             /* Note: Change $bookedTimes variable below to $missingTimes if changed above */
             //Loop displays tee time buttons
+//            for ($x = 0; $x < sizeof($times); $x++) {
+//
+//                if ($bookedTimes[$x] == 1 && $x == 0) {
+//                    echo "<tr><td><button id='" . $times[$x] . "' class='btn_off'>$times[$x]</div></td>";
+//                } else if ($bookedTimes[$x] != 1 && $x == 0) {
+//                    echo"<tr><td><button id='" . $times[$x] . "' class='btnOn' onclick=refreshTime('" . $times[$x] . "','" . $timesID[$x] . "')>$times[$x]</button></td>";
+//                } else if ($bookedTimes[$x] != 1 && ($x + 1) % 4 == 0 && ( $x != count($times) - 1) && $x != 0) {
+//                    echo "<td><button id='" . $times[$x] . "' class='btnOn' onclick=refreshTime('" . $times[$x] . "','" . $timesID[$x] . "')>$times[$x]</button></td></tr><tr>";
+//                } else if ($bookedTimes[$x] == 1 && ($x + 1) % 4 == 0 && ( $x != count($times) - 1) && $x != 0) {
+//                    echo "<td><button id='" . $times[$x] . "' class='btn_off'>$times[$x]</button></td></tr><tr>";
+//                } else if ($bookedTimes[$x] == 1 && $x == (count($times) - 1)) {
+//                    echo "<td><button id='" . $times[$x] . "' class='btn_off'>$times[$x]</button></td></tr>";
+//                } else if ($bookedTimes[$x] != 1 && $x == (count($times) - 1)) {
+//                    echo "<td><button id='" . $times[$x] . "' class='btnOn' onclick=refreshTime('" . $times[$x] . "','" . $timesID[$x] . "')>$times[$x]</button></td></tr>";
+//                } else if ($bookedTimes[$x] == 1 && $x != 0) {
+//                    echo "<td><button class='btn_off'>$times[$x]</button></td>";
+//                } else
+//                    echo "<td><button id='" . $times[$x] . "' class='btnOn' onclick=refreshTime('" . $times[$x] . "','" . $timesID[$x] . "')>$times[$x]</button></td>";
+//            }
+            
             for ($x = 0; $x < sizeof($times); $x++) {
-
-                if ($bookedTimes[$x] == 1 && $x == 0) {
-                    echo "<tr><td><button class='btn_off'>$times[$x]</div></td>";
-                } else if ($bookedTimes[$x] != 1 && $x == 0) {
-                    echo"<tr><td><button class='btnOn' style='cursor:pointer;' onclick=refreshTime('" . $times[$x] . "','" . $timesID[$x] . "')>$times[$x]</button></td>";
-                } else if ($bookedTimes[$x] != 1 && ($x + 1) % 4 == 0 && ( $x != count($times) - 1) && $x != 0) {
-                    echo "<td><button class='btnOn' style='cursor:pointer;' onclick=refreshTime('" . $times[$x] . "','" . $timesID[$x] . "')>$times[$x]</button></td></tr><tr>";
-                } else if ($bookedTimes[$x] == 1 && ($x + 1) % 4 == 0 && ( $x != count($times) - 1) && $x != 0) {
-                    echo "<td><button class='btn_off'>$times[$x]</button></td></tr><tr>";
-                } else if ($bookedTimes[$x] == 1 && $x == (count($times) - 1)) {
-                    echo "<td><button class='btn_off'>$times[$x]</button></td></tr>";
-                } else if ($bookedTimes[$x] != 1 && $x == (count($times) - 1)) {
-                    echo "<td><button class='btnOn' onclick=refreshTime('" . $times[$x] . "','" . $timesID[$x] . "')>$times[$x]</button></td></tr>";
-                } else if ($bookedTimes[$x] == 1 && $x != 0) {
-                    echo "<td><button class='btn_off'>$times[$x]</button></td>";
+                if ($x == 0) {
+                    echo "<tr><td><button id='" . $times[$x] . "' class='btn_off'>$times[$x]</div></td>";
+                } else if (($x + 1) % 4 == 0 && ( $x != count($times) - 1) && $x != 0) {
+                    echo "<td><button id='" . $times[$x] . "' class='btn_off'>$times[$x]</button></td></tr><tr>";
+                } else if ($x == (count($times) - 1)) {
+                    echo "<td><button id='" . $times[$x] . "' class='btn_off'>$times[$x]</button></td></tr>";
                 } else
-                    echo "<td><button class='btnOn' style='cursor:pointer;' onclick=refreshTime('" . $times[$x] . "','" . $timesID[$x] . "')>$times[$x]</button></td>";
+                    echo "<td><button class='btn_off'>$times[$x]</button></td>";
             }
+            
             ?>
         </table>
         <br><br>
@@ -194,10 +222,31 @@
 <!--<script src="/Users/akbazuka/Desktop/kedlena/teeItUp/jsFiles/teeTimesJS.js"></script>-->
     <script>
 
+        //To validate tee time buttons; check if time has been passed already
+        var hawaiiTimeZone = new Date().toLocaleString("en-US", {timezone: "America/Hawaii"});
+        hawaiiTimeZone = new Date(hawaiiTimeZone);
+
+//    hawaiiTimeZone = hawaiiTimeZone.toLocaleString();
+
+//    var hawaiiTime = hawaiiTimeZone.split(", ")[1];
+
+//    var hawaiiDate = hawaiiTimeZone.split(", ")[0];
+
+//    console.log(hawaiiTime);
+//    
+        //Create date picker object
+        $('.datepicker').datepicker({
+            format: "yyyy-mm-dd",
+            startDate: '0d',
+            endDate: '+6d',
+            language: "en",
+            autoclose: true
+        });
+
         var selectedTime = "";
-        var selectedDate = ""; //Have to implement in confiramtion message.
-        var selectedTimeID = "";
-//        var selectedGolfCourse = "";
+        var selectedDate = "";
+        var selectedTimeID = ""; //Takes care of time and date
+        var selectedGolfCourseID = "";
 
         function refreshTime(x, y/*, z*/)
         {
@@ -207,6 +256,96 @@
 //            console.log(selectedTime);
 //            console.log(selectedTimeID);
         }
+
+//        function getGolfCourseID(g){
+//            selectedGolfCourseID = g;
+//        }
+        $(".datepicker").on('change', function (event) {
+            event.preventDefault();
+            //alert(this.value);
+            selectedDate = this.value;
+            //alert(selectedDate);
+            getTimes();
+            refreshDate();
+        });
+
+        function getTimes() {
+            $.ajax({
+            type: "POST",
+            url: "getTeeTimes.php",
+            data: {selectedDate: selectedDate, selectedGolfCourseID: 1},
+            success: function (result)
+            {
+                //console.log(result);
+                $('#tt').html(result);
+            }
+        });
+        }
+
+        function refreshDate() {
+            //selectedDate = $('.datepicker').val(); //Returns value from datepicker
+
+            console.log("The selected date is: " + selectedDate);
+
+//           $('#tt').text(selectedDate); //Replace contents of table   
+            //To validate tee time buttons
+
+//        -------First pull tee times from database here, then run below--------------------------------------
+            //getTImes();
+            
+            //Save elements of class and length in Variables to be used in for loop
+            var count = $('.btnOn').length;
+            var classArray = $('.btnOn');
+            //console.log(classArray[0]);
+
+            dateYear = selectedDate.split("-")[0];
+            dateMonth = selectedDate.split("-")[1];
+//         console.log("Date Month: "+dateMonth); //Current month shows correctly
+            dateDay = selectedDate.split("-")[2];
+
+            for (var i = 0; i < count; i++) {
+                //console.log(count);
+                //for (var i = document.getElementsByClassName('btnOn').length; i > 0; i--){
+                console.log("This is i: " + i);
+                //console.log($('.btnOn').length); //check no of items left in array
+                console.log("These are the elements: " + classArray[i].id);
+                buttonHour = classArray[i].id.split(":")[0];
+                buttonMinute = classArray[i].id.split(":")[1];
+
+//           buttonHour = document.getElementsByClassName('btnOn')[i].id.split(":")[0];
+//           buttonMinute = document.getElementsByClassName('btnOn')[i].id.split(":")[1];
+
+                buttonTime = new Date(dateYear, (dateMonth - 1), dateDay, buttonHour, buttonMinute); //For some reason, date month appears as next month after the current so had to do (month-1)
+                //console.log(buttonTime.toLocaleString());
+                //console.log(hawaiiTimeZone.toLocaleString());
+
+                testTime = new Date(2019, 10, 23, 14, 16);
+
+//             console.log(buttonTime.toLocaleString());
+//             console.log(testTime.toLocaleString());
+
+                if (buttonTime <= testTime) {
+//                console.log("True");
+                    relevantButton = classArray[i].id;
+//                console.log(relevantButton);
+
+                    //               console.log("This is the time selected: "+$('.btnOn').get(i).id);
+                    //               console.log("This is the current time: "+hawaiiTimeZone);
+
+//                console.log(document.getElementById(relevantButton));
+
+                    thisID = document.getElementById(relevantButton);
+                    thisID.classList.remove("btnOn");
+                    thisID.classList.add("btn_off");
+//                $('#10:15').addClass('btnOff').removeClass('btnOn'); //not working for some reason 
+                } else {
+                    thisID.classList.remove("btn_off");
+                    thisID.classList.add("btnOn");
+                }
+            }
+        }
+
+        //console.log($('.btnOn').get(0).id);
 
         //Event Listener to reset selectedTime to empty when user clicks anywhere outside a tee time button
         document.addEventListener(`click`, function (event) {
@@ -234,7 +373,7 @@
                 text: 'You booked a tee time at ' + selectedTime + ' on 10/01/19'
             });
             $(Swal.getConfirmButton()).click(function () {
-                document.location.reload(true); //Reload document when ok button is clicked
+                window.location.replace("viewBookings.php"); //Automatically navigate to view bookings page when okay button is clicked
             });
         }
 
