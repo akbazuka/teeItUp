@@ -304,17 +304,18 @@
 //                testTime = new Date(2019, 10, 24, 14, 16);
 //                if (buttonTime <= testTime) {
 
-                if (buttonTime.valueOf() <= hawaiiTimeZone.valueOf()) { //Check if current time is Hawaii is past tee time and turn button off if so
-                    //console.log("True");
                     relevantButton = classArray[i].id;
                     //console.log("This is the relavant button: "+relevantButton);
+                    
+                    //console.log(document.getElementById(relevantButton));
+                    thisID = document.getElementById(relevantButton);
+                    
+                if (buttonTime.valueOf() <= hawaiiTimeZone.valueOf()) { //Check if current time is Hawaii is past tee time and turn button off if so
+                    //console.log("True");
 
                     //console.log("This is the time selected: "+$('.btnOn').get(i).id);
                     //console.log("This is the current time: "+hawaiiTimeZone);
 
-//                    console.log(document.getElementById(relevantButton));
-
-                    thisID = document.getElementById(relevantButton);
                     thisID.classList.remove("btnOn");
                     thisID.classList.add("btn_off");
                     //thisID.setAttribute("onclick", ""); removes onclick event for button but apparently is not needed here
@@ -344,7 +345,7 @@
                 url: "pushBookingsAjax.php",
                 data: {selectedTimeID: selectedTimeID},
                 success: function (data) {
-                    //                console.log(data);
+                    console.log(data);
                 }
             });
 

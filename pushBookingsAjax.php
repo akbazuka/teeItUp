@@ -45,34 +45,65 @@ try {
     $link->query($sql);
 
     //For updating teeTimes table to show that teeTime that was booked is no longer available
-    $sql = "UPDATE `teeTime` SET `booked` = 1 WHERE `teeTime`.`teeTimeID` =  $timeID";
+    $sql1 = "UPDATE `teeTime` SET `booked` = 1 WHERE `teeTime`.`teeTimeID` =  $timeID";
     //$results = $conn->exec($sql);
-    $link->query($sql);
+    $link->query($sql1);
 
     //$sql1 = $conn->prepare("SELECT `email` FROM `users` WHERE `id`=" . $_SESSION['id']);
     //$sql1->execute();
     //$results1 = $sql1->fetchAll(PDO::FETCH_ASSOC);
     
     //Get user's email
-    $sql = "SELECT `email` FROM `users` WHERE `id`=" . $_SESSION['id'];
-    $result = $link->query($sql);
+    $sql2 = "SELECT `email` FROM `users` WHERE `id`=" . $_SESSION['id'];
+    $result2 = $link->query($sql2);
 
-    if ($result->num_rows > 0) {
+    if ($result2->num_rows > 0) {
 
-        while ($row = $result->fetch_assoc()) {
+        while ($row = $result2->fetch_assoc()) {
             $email = $row["email"];
         }
     } else {
         echo "0 results for user's eamil";
     }
+    
+    //Get user's emailNotification Preference
+    $sql3 = "SELECT `emailNotification` FROM `users` WHERE `id`=" . $_SESSION['id'];
+    $result3 = $link->query($sql3);
 
+    while ($row = $result3->fetch_assoc()) {
+        $emailNotify = $row["emailNotification"];
+    }
+    //echo "This is the value of email: ".$emailNotify;
+    
+        //Get user's phone number
+    $sql6 = "SELECT `phoneNumber` FROM `users` WHERE `id`=" . $_SESSION['id'];
+    $result6 = $link->query($sql6);
+
+    if ($result6->num_rows > 0) {
+
+        while ($row = $result6->fetch_assoc()) {
+            $phone = $row["phoneNumber"];
+        }
+    } else {
+        echo "0 results for user's phone number";
+    }
+    
+    //Get user's emailNotification Preference
+    $sql7 = "SELECT `phoneNotification` FROM `users` WHERE `id`=" . $_SESSION['id'];
+    $result7 = $link->query($sql7);
+
+    while ($row = $result7->fetch_assoc()) {
+        $phoneNotify = $row["phoneNotification"];
+    }
+    
+    
     //Get tee time and date for tee time ID
-    $sql = "SELECT * FROM `teeTime` WHERE `teeTimeID`=" . $timeID;
-    $result = $link->query($sql);
+    $sql4 = "SELECT * FROM `teeTime` WHERE `teeTimeID`=" . $timeID;
+    $result4 = $link->query($sql4);
 
-    if ($result->num_rows > 0) {
+    if ($result4->num_rows > 0) {
 
-        while ($row = $result->fetch_assoc()) {
+        while ($row = $result4->fetch_assoc()) {
             $dates_timesFormat = (explode(" ", date('Y-m-d H:i', strtotime($row['teeDateTime']))));
             $time = $dates_timesFormat[1];
             $date = $dates_timesFormat[0];
@@ -84,12 +115,12 @@ try {
     }
 
     //Get golf course name
-    $sql = "SELECT `golfCourseName` FROM `golfCourse` WHERE `golfCourseID`=" . $golfCourseID;
-    $result = $link->query($sql);
+    $sql5 = "SELECT `golfCourseName` FROM `golfCourse` WHERE `golfCourseID`=" . $golfCourseID;
+    $result5 = $link->query($sql5);
 
-    if ($result->num_rows > 0) {
+    if ($result5->num_rows > 0) {
 
-        while ($row = $result->fetch_assoc()) {
+        while ($row = $result5->fetch_assoc()) {
             $golfCourseName = $row['golfCourseName'];
         }
     } else {
@@ -125,24 +156,27 @@ try {
     //PHP Mailer; send confirmation email to use when booking is made-----------
     
     //$body = file_get_contents('phpmailer/TeeItUpMail.php');
+    
+        //This config for go daddy hosting (has high security measures)
+        $mail = new PHPMailer(true);
+        $mail->isSMTP();
+        $mail->SMTPDebug=2;                              
+        $mail->Host = 'localhost';
+        $mail->SMTPAuth = false;
+        $mail->Port = 25;
+        $mail->setFrom('team@kedlena.com','Tee It Up! Team');
 
-    //This config for go daddy hosting (has high security measures)
-    $mail = new PHPMailer(true);
-    $mail->isSMTP();
-    $mail->SMTPDebug=2;                              
-    $mail->Host = 'localhost';
-    $mail->SMTPAuth = false;
-    $mail->Port = 25;
-    $mail->setFrom('team@kedlena.com','Tee It Up! Team');
+        $mail->CharSet = 'UTF-8';
+        $mail->isHTML(true);
+        $mail->addAddress($email);
 
-    $mail->CharSet = 'UTF-8';
-    $mail->isHTML(true);
-    $mail->addAddress($email);
-
-    $mail->addAddress($email);
-    $mail->Subject = 'Tee It Up- Booking Confirmation';
-    $mail->msgHTML($body);
-    $mail->send();
+        $mail->addAddress($email);
+        $mail->Subject = 'Tee It Up- Booking Confirmation';
+        $mail->msgHTML($body);
+        //If current user's preference is to get emails.   
+        if($emailNotify==1){
+            $mail->send();
+        }
 
 //        $mail = new PHPMailer(true);
 //        $mail->isSMTP();          
@@ -172,3 +206,32 @@ try {
     echo "Error: " . $e->getMessage();
 }
 ?>
+
+<script>
+    var phoneNotify = <?php echo $phoneNotify;?>;
+    console.log("This is the user's text preference: "+phoneNotify);
+    var cell = <?php echo $phone;?>;
+    console.log("This is the user's phone number: "+cell);
+    var message = <?php echo "Congratulations on booking a tee time for "+$time+" on "+$date+" at "+$golfCourseName+". \n"
+            . "To view or manage your booking, please log in to your account at www.kedlena.com/teeItUp. -Tee It Up! Team";?>;
+    console.log("This is the user's message: "+message);
+            
+    function ajax()
+    {
+        //send data to another page
+        $.ajax({
+            url: "https://www.italoha.com/csci3632/precious.binas/requests/sendTextMessage.php?cell=" + cell + "&message=" + message,
+            success: function (result)
+            {
+                console.log("This is the result of sending text: "+result);
+            }
+        });
+
+    }
+    
+    if(phoneNotify == 1)
+    {
+        ajax();
+    }
+    
+</script>

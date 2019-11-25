@@ -3,8 +3,8 @@
 // Include config file
 require_once "config.php";
 // Define variables and initialize with empty values
-$username = $password = $confirm_password = $email = "";
-$username_err = $password_err = $confirm_password_err = $email_err = "";
+$username = $password = $confirm_password = $email = $phone = "";
+$username_err = $password_err = $confirm_password_err = $email_err = $phone_err = "";
 // Processing form data when form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate username
@@ -63,17 +63,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
     
+    //Validate Phone
+    if (empty($_POST["phone"])) {
+        $phone_err = "Phone number is required";
+    } elseif (strlen(trim($_POST["phone"])) != 11) {
+        $phone_err = "Phone number must be 11 characters.";
+    } else {
+        $phone = trim($_POST["phone"]);
+    } 
+    
     // Check input errors before inserting in database
     if (empty($username_err) && empty($password_err) && empty($confirm_password_err) && empty($email_err)) {
         // Prepare an insert statement
-        $sql = "INSERT INTO users (username, password, email) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO users (username, password, email, phoneNumber) VALUES (?, ?, ?, ?)";
         if ($stmt = mysqli_prepare($link, $sql)) {
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "sss", $param_username, $param_password, $param_email);
+            mysqli_stmt_bind_param($stmt, "ssss", $param_username, $param_password, $param_email, $pararm_phone);
             // Set parameters
             $param_username = $username;
             $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
             $param_email = $email;
+            $pararm_phone = $phone;
             // Attempt to execute the prepared statement
             if (mysqli_stmt_execute($stmt)) {
                 // Redirect to login page
@@ -108,7 +118,7 @@ include_once 'title.php';
                 position: absolute;
 /*                top: 25%;*/
                 left: 0;
-                height: 70%;
+                height: 73%;
                 width: 100%;
             }
 
@@ -123,7 +133,7 @@ include_once 'title.php';
                 border: 3px solid seagreen;
                 border-radius: 20px;
                 background-color: white;
-                padding: 20px;
+                padding: 10px 20px 10px 20px;
             </style>
         </head>
         <body style="background-color: transparent;"> 
@@ -148,10 +158,15 @@ include_once 'title.php';
                                 <input type="password" name="confirm_password" class="form-control" value="<?php echo $confirm_password; ?>">
                                 <span class="help-block"><?php echo $confirm_password_err; ?></span>
                             </div>
-                            <div class="form-group <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
+                            <div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
                                 <label>E-mail</label>
-                                <input type="email" name="email" class="form-control" value="<?php echo $email; ?>">
+                                <input type="email" name="email" class="form-control" placeholder="user@example.com" value="<?php echo $email; ?>">
                                 <span class="help-block"><?php echo $email_err; ?></span>
+                            </div>
+                            <div class="form-group <?php echo (!empty($phone_err)) ? 'has-error' : ''; ?>">
+                                <label>Phone Number</label>
+                                <input type="text" name="phone" class="form-control" placeholder="11 digit cell number" value="<?php echo $phone; ?>">
+                                <span class="help-block"><?php echo $phone_err; ?></span>
                             </div>
                             <div class="form-group">
                                 <input type="submit" class="btn btn-primary" value="Submit">

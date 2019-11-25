@@ -30,7 +30,7 @@ try {
     
     //$date = str_replace('-', '/', $date);
     
-    $sql = $conn->prepare("SELECT * FROM `teeTime` WHERE DATE(`teeDateTime`) = '".$date."' AND `golfCourseID` = ".$golfCourse."");
+    $sql = $conn->prepare("SELECT * FROM `teeTime` WHERE DATE(`teeDateTime`) = '".$date."' AND `golfCourseID` = ".$golfCourse." ORDER BY TIME(`teeDateTime`)");
     $sql->execute();
     $result = $sql->fetchAll(PDO::FETCH_ASSOC);
     
