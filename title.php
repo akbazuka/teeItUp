@@ -11,9 +11,8 @@
     <body>
         <a class="header" target="_self" href="index.php">
             <div id="header">
-                &ensp;&ensp;&ensp;&ensp;&ensp;<span class="titleHead">Tee It Up!</span><span class="titleSub">&ensp;&ensp;A simple solution to book and manage your golf tee times.</span>
-                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                <img class="img1" src="images/logo.png" alt="Tee It Up Logo">
+                &ensp;&ensp;&ensp;&ensp;&ensp;&emsp;&emsp;<img class="img1" src="images/logo.png" alt="Tee It Up Logo">&emsp;&emsp;&emsp;&emsp;<span class="titleHead">Tee It Up!</span><span class="titleSub">&ensp;&ensp;A simple solution to book and manage your golf tee times.</span>
+                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                 <!--&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<img id="logo" src="teeItUpLogo.png" alt="Tee It Up">-->
             </div>
         </a>

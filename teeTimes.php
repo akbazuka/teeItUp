@@ -166,8 +166,8 @@
             // set the resulting array to associative  
             $result11 = $stmt11->fetchAll(PDO::FETCH_ASSOC);
 
-            echo "<div class='box boxLeft'><center><b>Course Description</b></center><p>" . $result11[0]['courseWriteUp'] . "</p></div>";
-            echo "<div class='box boxRight'><b>Course Information</b><br><br><p>Hours: " . $result11[0]['courseHours'] . "<br><br>Phone: " . $result11[0]['coursePhone'] . "</p></div>";
+            echo "<div class='box boxLeft'><center><b>Course Description</b></center><p><br>" . $result11[0]['courseWriteUp'] . "</p></div>";
+            echo "<div class='box boxRight'><center><b>Course Information</b></center><br><p><u>Hours</u>: " . $result11[0]['courseHours'] . "<br><br><u>Phone</u>: " . $result11[0]['coursePhone'] . "<br><br><u>Location</u>: ". $result11[0]['courseLocation'] . "</p></div>";
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
@@ -246,7 +246,8 @@
         var selectedTime = "";
         var selectedDate = "";
         var selectedTimeID = ""; //Takes care of time and date
-        var selectedGolfCourseID = "";
+        var selectedGolfCourseID = <?php echo $courseID; ?>;
+        //console.log("Selected golf course ID: "+selectedGolfCourseID);
 
         function refreshTime(x, y/*, z*/)
         {
@@ -273,7 +274,7 @@
             $.ajax({
             type: "POST",
             url: "getTeeTimes.php",
-            data: {selectedDate: selectedDate, selectedGolfCourseID: 1},
+            data: {selectedDate: selectedDate, selectedGolfCourseID: selectedGolfCourseID},
             success: function (result)
             {
                 //console.log(result);

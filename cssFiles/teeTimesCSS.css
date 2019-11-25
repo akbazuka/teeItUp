@@ -20,12 +20,29 @@
 {
    float:left; 
    margin-left: 3%;
+   padding: 7px 7px 4px 7px;
+   font-size: 14px;
+   height: 320px;
+   text-align: left;
+   line-height: 1.4em;
+}
+.boxLeft b
+{
+    font-size: 16px;
 }
 
 .boxRight
 {
    float:right; 
    margin-right: 3%;
+   padding: 7px 7px 4px 7px;
+   font-size: 14px;
+   text-align: left;
+}
+
+.boxRight b
+{
+    font-size: 16px;
 }
 
 
