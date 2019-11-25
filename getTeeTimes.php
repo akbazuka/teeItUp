@@ -53,9 +53,9 @@ try {
         if ($bookedTimes[$x] == 1 && $x == 0) {
             echo "<tr><td><button id='" . $times[$x] . "' class='btn_off'>$times[$x]</div></td>";
         } else if ($bookedTimes[$x] != 1 && $x == 0) {
-            echo"<tr><td><button id='" . $times[$x] . "' class='btnOn' style='cursor:pointer;' onclick=refreshTime('" . $times[$x] . "','" . $timesID[$x] . "')>$times[$x]</button></td>";
+            echo"<tr><td><button id='" . $times[$x] . "' class='btnOn' onclick=refreshTime('" . $times[$x] . "','" . $timesID[$x] . "')>$times[$x]</button></td>";
         } else if ($bookedTimes[$x] != 1 && ($x + 1) % 4 == 0 && ( $x != count($times) - 1) && $x != 0) {
-            echo "<td><button id='" . $times[$x] . "' class='btnOn' style='cursor:pointer;' onclick=refreshTime('" . $times[$x] . "','" . $timesID[$x] . "')>$times[$x]</button></td></tr><tr>";
+            echo "<td><button id='" . $times[$x] . "' class='btnOn' onclick=refreshTime('" . $times[$x] . "','" . $timesID[$x] . "')>$times[$x]</button></td></tr><tr>";
         } else if ($bookedTimes[$x] == 1 && ($x + 1) % 4 == 0 && ( $x != count($times) - 1) && $x != 0) {
             echo "<td><button id='" . $times[$x] . "' class='btn_off'>$times[$x]</button></td></tr><tr>";
         } else if ($bookedTimes[$x] == 1 && $x == (count($times) - 1)) {
@@ -65,7 +65,7 @@ try {
         } else if ($bookedTimes[$x] == 1 && $x != 0) {
             echo "<td><button class='btn_off'>$times[$x]</button></td>";
         } else
-            echo "<td><button id='" . $times[$x] . "' class='btnOn' style='cursor:pointer;' onclick=refreshTime('" . $times[$x] . "','" . $timesID[$x] . "')>$times[$x]</button></td>";
+            echo "<td><button id='" . $times[$x] . "' class='btnOn' onclick=refreshTime('" . $times[$x] . "','" . $timesID[$x] . "')>$times[$x]</button></td>";
     }
     } catch (Exception $e) {
     echo "Error: " . $e->getMessage();

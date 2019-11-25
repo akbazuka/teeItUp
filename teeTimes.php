@@ -225,15 +225,8 @@
         //To validate tee time buttons; check if time has been passed already
         var hawaiiTimeZone = new Date().toLocaleString("en-US", {timezone: "America/Hawaii"});
         hawaiiTimeZone = new Date(hawaiiTimeZone);
-
-//    hawaiiTimeZone = hawaiiTimeZone.toLocaleString();
-
-//    var hawaiiTime = hawaiiTimeZone.split(", ")[1];
-
-//    var hawaiiDate = hawaiiTimeZone.split(", ")[0];
-
-//    console.log(hawaiiTime);
-//    
+//        console.log("This is Hawaiian Time: "+hawaiiTimeZone.toLocaleString());
+    
         //Create date picker object
         $('.datepicker').datepicker({
             format: "yyyy-mm-dd",
@@ -246,31 +239,27 @@
         var selectedTime = "";
         var selectedDate = "";
         var selectedTimeID = ""; //Takes care of time and date
-        var selectedGolfCourseID = <?php echo $courseID; ?>;
+        var selectedGolfCourseID = <?php echo $courseID; ?>; //Get golf course ID from php
         //console.log("Selected golf course ID: "+selectedGolfCourseID);
 
-        function refreshTime(x, y/*, z*/)
+        function refreshTime(x, y)
         {
             selectedTime = x;
             selectedTimeID = y;
-//            selectedGolfCourse = z;
 //            console.log(selectedTime);
 //            console.log(selectedTimeID);
         }
 
-//        function getGolfCourseID(g){
-//            selectedGolfCourseID = g;
-//        }
         $(".datepicker").on('change', function (event) {
             event.preventDefault();
             //alert(this.value);
             selectedDate = this.value;
             //alert(selectedDate);
-            getTimes();
-            refreshDate();
+            getTimes(refreshDate); //Callback to refreshDate with getTimes
+            //refreshDate();
         });
 
-        function getTimes() {
+        function getTimes(callback) {
             $.ajax({
             type: "POST",
             url: "getTeeTimes.php",
@@ -281,65 +270,56 @@
                 $('#tt').html(result);
             }
         });
+            setTimeout(function() {callback();},500); //Call function after a 300 milliseconds of time to give ajax time to process result; get tee proper times for refreshDate()
         }
 
-        function refreshDate() {
-            //selectedDate = $('.datepicker').val(); //Returns value from datepicker
-
-            console.log("The selected date is: " + selectedDate);
-
-//           $('#tt').text(selectedDate); //Replace contents of table   
-            //To validate tee time buttons
-
-//        -------First pull tee times from database here, then run below--------------------------------------
-            //getTImes();
+        function refreshDate() {           
+            //console.log("The selected date is: " + selectedDate);
             
             //Save elements of class and length in Variables to be used in for loop
             var count = $('.btnOn').length;
             var classArray = $('.btnOn');
-            //console.log(classArray[0]);
+            //console.log(classArray);
 
             dateYear = selectedDate.split("-")[0];
             dateMonth = selectedDate.split("-")[1];
-//         console.log("Date Month: "+dateMonth); //Current month shows correctly
+//            console.log("Date Month: "+dateMonth); //Current month shows correctly
             dateDay = selectedDate.split("-")[2];
 
             for (var i = 0; i < count; i++) {
                 //console.log(count);
-                //for (var i = document.getElementsByClassName('btnOn').length; i > 0; i--){
-                console.log("This is i: " + i);
+                //console.log("This is i: " + i);
                 //console.log($('.btnOn').length); //check no of items left in array
-                console.log("These are the elements: " + classArray[i].id);
+                //console.log("These are the elements: " + classArray[i].id);
                 buttonHour = classArray[i].id.split(":")[0];
                 buttonMinute = classArray[i].id.split(":")[1];
-
-//           buttonHour = document.getElementsByClassName('btnOn')[i].id.split(":")[0];
-//           buttonMinute = document.getElementsByClassName('btnOn')[i].id.split(":")[1];
 
                 buttonTime = new Date(dateYear, (dateMonth - 1), dateDay, buttonHour, buttonMinute); //For some reason, date month appears as next month after the current so had to do (month-1)
                 //console.log(buttonTime.toLocaleString());
                 //console.log(hawaiiTimeZone.toLocaleString());
 
-                testTime = new Date(2019, 10, 23, 14, 16);
-
 //             console.log(buttonTime.toLocaleString());
-//             console.log(testTime.toLocaleString());
+             //console.log(testTime.toLocaleString());
 
-                if (buttonTime <= testTime) {
-//                console.log("True");
+//                testTime = new Date(2019, 10, 24, 14, 16);
+//                if (buttonTime <= testTime) {
+
+                if (buttonTime.valueOf() <= hawaiiTimeZone.valueOf()) { //Check if current time is Hawaii is past tee time and turn button off if so
+                    //console.log("True");
                     relevantButton = classArray[i].id;
-//                console.log(relevantButton);
+                    //console.log("This is the relavant button: "+relevantButton);
 
-                    //               console.log("This is the time selected: "+$('.btnOn').get(i).id);
-                    //               console.log("This is the current time: "+hawaiiTimeZone);
+                    //console.log("This is the time selected: "+$('.btnOn').get(i).id);
+                    //console.log("This is the current time: "+hawaiiTimeZone);
 
-//                console.log(document.getElementById(relevantButton));
+//                    console.log(document.getElementById(relevantButton));
 
                     thisID = document.getElementById(relevantButton);
                     thisID.classList.remove("btnOn");
                     thisID.classList.add("btn_off");
+                    //thisID.setAttribute("onclick", ""); removes onclick event for button but apparently is not needed here
 //                $('#10:15').addClass('btnOff').removeClass('btnOn'); //not working for some reason 
-                } else {
+                } else if (buttonTime > hawaiiTimeZone && thisID.classList.contains("btn_off")){
                     thisID.classList.remove("btn_off");
                     thisID.classList.add("btnOn");
                 }
