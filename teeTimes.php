@@ -172,6 +172,13 @@
             echo "Error: " . $e->getMessage();
         }
         ?>
+
+        <center>
+            <div id="loading" style="display:none;">
+                <img id="loading" style ="width:25%;" src="https://i.giphy.com/media/dwZMxZ2VX4F3O/giphy.webp">
+            </div>
+        </center>
+        
         <table class="timeTable" id="tt">
             <?php
             /* Note: Change $bookedTimes variable below to $missingTimes if changed above */
@@ -338,19 +345,54 @@
             }
         });
 
+
+        function showLoading() {
+            //Show loading image
+            $("#loading").show();
+
+            //After specified amount of time (milliseconds), hide loading image
+            setTimeout(function () {
+                $('#loading').hide();
+            }, 7000);
+
+            //After specified amount of time (milliseconds), show ajax results 
+            setTimeout(function () {
+                $('#tt').show();
+            }, 7000);
+        }
+
         function clickedBookButton()
         {
+            //Cursor indicates that something is loading
+            $("#loading").css("cursor", "wait");
+
+            //Hide tee times
+            $("#tt").hide();
+            
+            showLoading();
+
+            //Don't allow click anywhere on screen
+            //$("body").children().bind('click', function(){ return false; }); Not working
+
             //Ajax method to insert into booked table in database and update tee times table
             $.ajax({
                 type: "POST",
                 url: "pushBookingsAjax.php",
                 data: {selectedTimeID: selectedTimeID},
                 success: function (data) {
-                    console.log(data);
+                    //console.log(data); 
+
+                    //Cursor back to default after ajax request loads
+                    $("#loading").css("cursor", "default");
+
+                    //Allow click on screen again
+                    //$("html").children().unbind('click'); Bind not working above
+
                     Swal.fire({
                         icon: 'success',
                         title: 'Congrats!',
-                        text: 'You booked a tee time at ' + selectedTime + ' on 10/01/19'
+                        text: 'You booked a tee time at ' + selectedTime + ' on 10/01/19',
+                        allowOutsideClick: false
                     });
                     $(Swal.getConfirmButton()).click(function () {
                         window.location.replace("viewBookings.php"); //Automatically navigate to view bookings page when okay button is clicked
@@ -374,10 +416,10 @@
                     var time = obj.time;
                     var date = obj.date;
                     var golfCourseName = obj.golfCourseName;
-                    var message = "Congratulations on booking a tee time for " + time + " on " + date + " at " + golfCourseName +". To manage booking, please log into your account at www.kedlena.com/teeItUp\n -Tee It Up! Team";
+                    var message = "Congratulations on booking a tee time for " + time + " on " + date + " at " + golfCourseName + ". To manage booking, please log into your account at www.kedlena.com/teeItUp\n   -Tee It Up! Team";
                     //var message1 = "To view or manage your booking, please log in to your account at www.kedlena.com/teeItUp.\n -Tee It Up! Team";
                     if (phoneNotify == 1) {
-                        //send data to another page
+                        //The below link sends text message. replace with own php file if using own server in future
                         $.ajax({
                             url: "https://www.italoha.com/csci3632/precious.binas/requests/sendTextMessage.php?cell=" + phone + "&message=" + message,
                             success: function (result)
