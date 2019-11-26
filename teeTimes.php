@@ -167,7 +167,7 @@
             $result11 = $stmt11->fetchAll(PDO::FETCH_ASSOC);
 
             echo "<div class='box boxLeft'><center><b>Course Description</b></center><p><br>" . $result11[0]['courseWriteUp'] . "</p></div>";
-            echo "<div class='box boxRight'><center><b>Course Information</b></center><br><p><u>Hours</u>: " . $result11[0]['courseHours'] . "<br><br><u>Phone</u>: " . $result11[0]['coursePhone'] . "<br><br><u>Location</u>: ". $result11[0]['courseLocation'] . "</p></div>";
+            echo "<div class='box boxRight'><center><b>Course Information</b></center><br><p><u>Hours</u>: " . $result11[0]['courseHours'] . "<br><br><u>Phone</u>: " . $result11[0]['coursePhone'] . "<br><br><u>Location</u>: " . $result11[0]['courseLocation'] . "</p></div>";
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
@@ -195,7 +195,7 @@
 //                } else
 //                    echo "<td><button id='" . $times[$x] . "' class='btnOn' onclick=refreshTime('" . $times[$x] . "','" . $timesID[$x] . "')>$times[$x]</button></td>";
 //            }
-            
+
             for ($x = 0; $x < sizeof($times); $x++) {
                 if ($x == 0) {
                     echo "<tr><td><button id='" . $times[$x] . "' class='btn_off'>$times[$x]</div></td>";
@@ -206,7 +206,6 @@
                 } else
                     echo "<td><button class='btn_off'>$times[$x]</button></td>";
             }
-            
             ?>
         </table>
         <br><br>
@@ -226,7 +225,7 @@
         var hawaiiTimeZone = new Date().toLocaleString("en-US", {timezone: "America/Hawaii"});
         hawaiiTimeZone = new Date(hawaiiTimeZone);
 //        console.log("This is Hawaiian Time: "+hawaiiTimeZone.toLocaleString());
-    
+
         //Create date picker object
         $('.datepicker').datepicker({
             format: "yyyy-mm-dd",
@@ -261,21 +260,23 @@
 
         function getTimes(callback) {
             $.ajax({
-            type: "POST",
-            url: "getTeeTimes.php",
-            data: {selectedDate: selectedDate, selectedGolfCourseID: selectedGolfCourseID},
-            success: function (result)
-            {
-                //console.log(result);
-                $('#tt').html(result);
-            }
-        });
-            setTimeout(function() {callback();},500); //Call function after a 300 milliseconds of time to give ajax time to process result; get tee proper times for refreshDate()
+                type: "POST",
+                url: "getTeeTimes.php",
+                data: {selectedDate: selectedDate, selectedGolfCourseID: selectedGolfCourseID},
+                success: function (result)
+                {
+                    //console.log(result);
+                    $('#tt').html(result);
+                }
+            });
+            setTimeout(function () {
+                callback();
+            }, 500); //Call function after a 300 milliseconds of time to give ajax time to process result; get tee proper times for refreshDate()
         }
 
-        function refreshDate() {           
+        function refreshDate() {
             //console.log("The selected date is: " + selectedDate);
-            
+
             //Save elements of class and length in Variables to be used in for loop
             var count = $('.btnOn').length;
             var classArray = $('.btnOn');
@@ -299,17 +300,17 @@
                 //console.log(hawaiiTimeZone.toLocaleString());
 
 //             console.log(buttonTime.toLocaleString());
-             //console.log(testTime.toLocaleString());
+                //console.log(testTime.toLocaleString());
 
 //                testTime = new Date(2019, 10, 24, 14, 16);
 //                if (buttonTime <= testTime) {
 
-                    relevantButton = classArray[i].id;
-                    //console.log("This is the relavant button: "+relevantButton);
-                    
-                    //console.log(document.getElementById(relevantButton));
-                    thisID = document.getElementById(relevantButton);
-                    
+                relevantButton = classArray[i].id;
+                //console.log("This is the relavant button: "+relevantButton);
+
+                //console.log(document.getElementById(relevantButton));
+                thisID = document.getElementById(relevantButton);
+
                 if (buttonTime.valueOf() <= hawaiiTimeZone.valueOf()) { //Check if current time is Hawaii is past tee time and turn button off if so
                     //console.log("True");
 
@@ -320,7 +321,7 @@
                     thisID.classList.add("btn_off");
                     //thisID.setAttribute("onclick", ""); removes onclick event for button but apparently is not needed here
 //                $('#10:15').addClass('btnOff').removeClass('btnOn'); //not working for some reason 
-                } else if (buttonTime > hawaiiTimeZone && thisID.classList.contains("btn_off")){
+                } else if (buttonTime > hawaiiTimeZone && thisID.classList.contains("btn_off")) {
                     thisID.classList.remove("btn_off");
                     thisID.classList.add("btnOn");
                 }
@@ -333,7 +334,7 @@
         document.addEventListener(`click`, function (event) {
             //Runs only when class is NOT 'btnOn'
             if (!event.target.closest('.btnOn')) {
-                refreshTime('', '', '');
+                refreshTime('', '');
             }
         });
 
@@ -346,16 +347,54 @@
                 data: {selectedTimeID: selectedTimeID},
                 success: function (data) {
                     console.log(data);
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Congrats!',
+                        text: 'You booked a tee time at ' + selectedTime + ' on 10/01/19'
+                    });
+                    $(Swal.getConfirmButton()).click(function () {
+                        window.location.replace("viewBookings.php"); //Automatically navigate to view bookings page when okay button is clicked
+                    });
                 }
             });
 
-            Swal.fire({
-                icon: 'success',
-                title: 'Congrats!',
-                text: 'You booked a tee time at ' + selectedTime + ' on 10/01/19'
-            });
-            $(Swal.getConfirmButton()).click(function () {
-                window.location.replace("viewBookings.php"); //Automatically navigate to view bookings page when okay button is clicked
+            //Ajax request to send SMS confirmation to user
+            $.ajax({
+                type: "POST",
+                url: "getSMS.php",
+                data: {selectedTimeID: selectedTimeID},
+                success: function (data1) {
+                    var obj = JSON.parse(data1); //Convert JSON data to javascript object
+                    //console.log(obj);
+                    //console.log("This is data 1: " + data1);
+                    var phoneNotify = obj.phoneNotify;
+                    //console.log("This is the notification preference: " + phoneNotify);
+                    var phone = obj.phone;
+                    //console.log("This is the phone no: " + phone);
+                    var time = obj.time;
+                    var date = obj.date;
+                    var golfCourseName = obj.golfCourseName;
+                    var message = "Congratulations on booking a tee time for " + time + " on " + date + " at " + golfCourseName +". To manage booking, please log into your account at www.kedlena.com/teeItUp\n -Tee It Up! Team";
+                    //var message1 = "To view or manage your booking, please log in to your account at www.kedlena.com/teeItUp.\n -Tee It Up! Team";
+                    if (phoneNotify == 1) {
+                        //send data to another page
+                        $.ajax({
+                            url: "https://www.italoha.com/csci3632/precious.binas/requests/sendTextMessage.php?cell=" + phone + "&message=" + message,
+                            success: function (result)
+                            {
+                                //console.log("This is the result of sending text: " + result);
+                            }
+                        });
+                        //Send message1 as separate message
+//                        $.ajax({
+//                            url: "https://www.italoha.com/csci3632/precious.binas/requests/sendTextMessage.php?cell=" + phone + "&message=" + message1,
+//                            success: function (result1)
+//                            {
+//                                //console.log("This is the result of sending text: " + result);
+//                            }
+//                        });
+                    }
+                }
             });
         }
 

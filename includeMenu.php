@@ -8,6 +8,14 @@ $result = $link->query($sql);
 while ($row = $result->fetch_assoc()) {
     $emailNotify = $row["emailNotification"];
 }
+
+//Get user's phoneNotification Preference
+$sql1 = "SELECT `phoneNotification` FROM `users` WHERE `id`=" . $_SESSION['id'];
+$result1 = $link->query($sql1);
+
+while ($row = $result1->fetch_assoc()) {
+    $phoneNotify = $row["phoneNotification"];
+}
 ?>
 
 <link href="cssFiles/menuCSS.css" rel="stylesheet"> 
@@ -45,13 +53,14 @@ while ($row = $result->fetch_assoc()) {
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
     <script>
         var emailNotify = <?php echo $emailNotify; ?>;
+        var phoneNotify = <?php echo $phoneNotify; ?>;
 
-        //Toggle button on or off
+        //Email Toggle button on or off
         if (emailNotify === 1)
         {
             $('#toggle-demo').bootstrapToggle('on');
         } else
-            $('#toggle-demo').bootstrapToggle('off');
+            $('#toggle-demo').bootstrapToggle('off');      
         
         //When email preference toggle is changed
         $('#toggle-demo').change(function(){
@@ -63,11 +72,39 @@ while ($row = $result->fetch_assoc()) {
                 emailNotify = 0;
             }
             
-             //Ajax method to insert into users table in database and update email preference
+             //Ajax method to insert into users table in database and update email confirmation preference
             $.ajax({
                 type: "POST",
-                url: "emailPhonePrefPush.php",
+                url: "emailPrefAjax.php",
                 data: {emailNotify: emailNotify},
+                success: function (data) {
+                    //console.log(data);
+                }
+            });
+        });
+        
+        //Phone Toggle button on or off
+        if (phoneNotify === 1)
+        {
+            $('#toggle-demo1').bootstrapToggle('on');
+        } else
+            $('#toggle-demo1').bootstrapToggle('off'); 
+        
+                //When email preference toggle is changed
+        $('#toggle-demo1').change(function(){
+            if($(this).prop("checked") === true){
+                phoneNotify = 1;
+                //console.log("This is on");
+            } else {
+                //console.log("This is off");
+                phoneNotify = 0;
+            }
+            
+             //Ajax method to insert into users table in database and update phone confirmation preference
+            $.ajax({
+                type: "POST",
+                url: "phonePrefAjax.php",
+                data: {phoneNotify: phoneNotify},
                 success: function (data) {
                     //console.log(data);
                 }

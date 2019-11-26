@@ -156,7 +156,9 @@
             // Search in dataTable
             $(document).ready(function () {
                 $('#dtBasicExample').DataTable({
-                    "searching": true // false to disable search (or any other option)
+                    "searching": true, // false to disable search (or any other option)
+                    "scrollY": "25em",
+                    "scrollCollapse": true
                 });
                 $('.dataTables_length').addClass('bs-select');
             });

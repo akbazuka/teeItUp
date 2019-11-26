@@ -135,6 +135,8 @@ try {
 //    $json = json_encode($result1);
 //    echo $json;
     //{USER}, {TIME}, {DATE}, {COURSE}
+    
+    //echo json_encode(array($phoneNotify,$phone,$time,$date,$golfCourseName));
 
     //Makes emai reusable for different variables by creating an array to process  email body
     $email_vars = array(
@@ -207,31 +209,3 @@ try {
 }
 ?>
 
-<script>
-    var phoneNotify = <?php echo $phoneNotify;?>;
-    console.log("This is the user's text preference: "+phoneNotify);
-    var cell = <?php echo $phone;?>;
-    console.log("This is the user's phone number: "+cell);
-    var message = <?php echo "Congratulations on booking a tee time for "+$time+" on "+$date+" at "+$golfCourseName+". \n"
-            . "To view or manage your booking, please log in to your account at www.kedlena.com/teeItUp. -Tee It Up! Team";?>;
-    console.log("This is the user's message: "+message);
-            
-    function ajax()
-    {
-        //send data to another page
-        $.ajax({
-            url: "https://www.italoha.com/csci3632/precious.binas/requests/sendTextMessage.php?cell=" + cell + "&message=" + message,
-            success: function (result)
-            {
-                console.log("This is the result of sending text: "+result);
-            }
-        });
-
-    }
-    
-    if(phoneNotify == 1)
-    {
-        ajax();
-    }
-    
-</script>
