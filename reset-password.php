@@ -56,10 +56,23 @@
 
                 // Attempt to execute the prepared statement
                 if (mysqli_stmt_execute($stmt)) {
-                    // Password updated successfully. Destroy the session, and redirect to login page
                     session_destroy();
-                    header("location: login.php");
-                    exit();
+                    // Password updated successfully. Destroy the session, and redirect to login page
+//                    header("location: login.php");
+//                    exit();
+                    //Escape directly to javascript from php (javascript within php)
+                    echo '<link href="cssFiles/swal2Size.css" rel="stylesheet">';
+                    echo '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>';
+                    echo '<script type="text/javascript">',
+                    'Swal.fire({
+                                    icon: "success",
+                                    title: "Congrats!",
+                                    text: "Your phone number was successfully changed!"
+                                });
+                                $(Swal.getConfirmButton()).click(function () {
+                                    window.location.replace("login.php"); //Navigate to home page
+                                });',
+                    '</script>';   
                 } else {
                     echo "Oops! Something went wrong. Please try again later.";
                 }

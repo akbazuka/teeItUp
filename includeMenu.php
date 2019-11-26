@@ -42,7 +42,7 @@ while ($row = $result1->fetch_assoc()) {
                 <li><a>Email Confirmation&ensp;&ensp;&ensp;&ensp;<input id="toggle-demo" type="checkbox" data-toggle="toggle" data-size="mini"></a></li>
                 <li><a href="resetEmail.php">Change Email</a></li>
                 <li class="divider"></li>
-                <li><a>SMS Confirmation&ensp;&ensp;&ensp;&ensp;<input id="toggle-demo1" type="checkbox" data-toggle="toggle" data-size="mini"></a></li>
+                <li><a>SMS Confirmation&ensp;&ensp;&ensp;&ensp;&ensp;<input id="toggle-demo1" type="checkbox" data-toggle="toggle" data-size="mini"></a></li>
                 <li><a href="resetPhone.php">Change Phone Number</a></li>
                 <li class="divider"></li>
                 <li><a href="logout.php"><b>Log Out</b></a></li>

@@ -92,7 +92,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 /*                top: 25%;*/
                 bottom:0;
                 left: 0;
-                height: 80%;
+                height: 70%;
                 width: 100%;
             }
             .middle {
