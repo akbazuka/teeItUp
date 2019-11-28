@@ -391,7 +391,7 @@
                     Swal.fire({
                         icon: 'success',
                         title: 'Congrats!',
-                        text: 'You booked a tee time at ' + selectedTime + ' on 10/01/19',
+                        text: 'Your booking was successful!',
                         allowOutsideClick: false
                     });
                     $(Swal.getConfirmButton()).click(function () {
@@ -416,7 +416,7 @@
                     var time = obj.time;
                     var date = obj.date;
                     var golfCourseName = obj.golfCourseName;
-                    var message = "Congratulations on booking a tee time for " + time + " on " + date + " at " + golfCourseName + ". To manage booking, please log into your account at www.kedlena.com/teeItUp\n   -Tee It Up! Team";
+                    var message = "Congratulations on booking a tee time for " + time + " on " + date + " at " + golfCourseName + ". To manage booking, please log into your account at www.kedlena.com/teeItUp";
                     //var message1 = "To view or manage your booking, please log in to your account at www.kedlena.com/teeItUp.\n -Tee It Up! Team";
                     if (phoneNotify == 1) {
                         //The below link sends text message. replace with own php file if using own server in future
