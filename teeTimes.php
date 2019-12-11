@@ -18,6 +18,10 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <!-- Jumping button -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+    
+    <!--luxon for TimeZone-->
+    <script src="jsFiles/addons/luxon.js"></script>
+    
     <!--<link rel="stylesheet" href="//brick.a.ssl.fastly.net/Roboto:400"/>-->
     <link rel="stylesheet" type="text/css" href="cssFiles/teeTimesCSS.css"/>
 
@@ -226,12 +230,14 @@
     </center>
 
 <!--<script src="/Users/akbazuka/Desktop/kedlena/teeItUp/jsFiles/teeTimesJS.js"></script>-->
+    
     <script>
 
         //To validate tee time buttons; check if time has been passed already
-        var hawaiiTimeZone = new Date().toLocaleString("en-US", {timezone: "America/Hawaii"});
-        hawaiiTimeZone = new Date(hawaiiTimeZone);
-//        console.log("This is Hawaiian Time: "+hawaiiTimeZone.toLocaleString());
+        //var hawaiiTimeZone = new Date().toLocaleString("en-US", {timezone: "America/Hawaii"});
+        var hawaiiTimeZone = luxon.DateTime.local().setZone('UTC+10');
+        //hawaiiTimeZone = new Date(hawaiiTimeZone);
+        console.log("This is Hawaiian Time: "+hawaiiTimeZone.toString());
 
         //Create date picker object
         $('.datepicker').datepicker({
@@ -329,6 +335,7 @@
                     //thisID.setAttribute("onclick", ""); removes onclick event for button but apparently is not needed here
 //                $('#10:15').addClass('btnOff').removeClass('btnOn'); //not working for some reason 
                 } else if (buttonTime > hawaiiTimeZone && thisID.classList.contains("btn_off")) {
+                    //console.log("False");
                     thisID.classList.remove("btn_off");
                     thisID.classList.add("btnOn");
                 }
@@ -416,7 +423,7 @@
                     var time = obj.time;
                     var date = obj.date;
                     var golfCourseName = obj.golfCourseName;
-                    var message = "Congratulations on booking a tee time for " + time + " on " + date + " at " + golfCourseName + ". To manage booking, please log into your account at www.kedlena.com/teeItUp";
+                    var message = "Congratulations on booking a tee time for " + time + " on " + date + " at " + golfCourseName + ". To manage booking, please log into your account at Tee It Up!";
                     //var message1 = "To view or manage your booking, please log in to your account at www.kedlena.com/teeItUp.\n -Tee It Up! Team";
                     if (phoneNotify == 1) {
                         //The below link sends text message. replace with own php file if using own server in future
